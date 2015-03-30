@@ -1,2 +1,2 @@
 # towdef-ai
-Tower Defense game made for my "Introduction to intelligent systems" course.
+Tower Defense game made for my 'Introduction to intelligent systems' course.
