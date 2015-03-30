@@ -7,5 +7,21 @@
 #define BOARD_W 20
 #define BOARD_H 20
 
+#define STANDING_HEALTH 50
+#define STANDING_ATTACK 50
+#define STANDING_SPEED 0
+
+#define PRIVATE_HEALTH 150
+#define PRIVATE_ATTACK 100
+#define PRIVATE_SPEED 1
+
+#define BOMBER_HEALTH 200
+#define BOMBER_ATTACK 300
+#define BOMBER_SPEED 0.4
+
+#define FAST_HEALTH 150
+#define FAST_ATTACK 40
+#define FAST_SPEED 2
+
 
 #endif //_DEFINES_H_
