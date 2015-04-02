@@ -5,6 +5,7 @@
 #include <cstdint>
 
 #include "defines.h"
+#include "GameEntity.h"
 
 namespace logic
 {
@@ -14,12 +15,12 @@ namespace logic
 class logic::Board
 {
 	//Private:
-	std::vector<std::vector<logic::GameEntity&>> board[BOARD_W][BOARD_H];
+	std::vector<logic::GameEntity*> board[BOARD_W][BOARD_H];
 
 public:
 
 	// Returns a vector of entities, at the position (x, y) of the board.
-	const std::vector<logic::GameEntity&>& getEntityOn(uint8_t x, uint8_t y);
+	const std::vector<logic::GameEntity*>* getEntityOn(uint8_t x, uint8_t y);
 };
 
 

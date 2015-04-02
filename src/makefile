@@ -3,7 +3,7 @@
 CC = g++
 OBJS = main.o Game.o Board.o GameEntity.o
 DEBUG = -g
-CFLAGS = -Wall -c $(DEBUG)
+CFLAGS = -Wall -std=c++11 -c $(DEBUG)
 LFLAGS = -Wall -L/usr/local/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 towdef.out : $(OBJS)
