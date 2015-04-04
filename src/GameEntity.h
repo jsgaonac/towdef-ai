@@ -6,12 +6,25 @@
 namespace logic
 {
 	class GameEntity;
+
+	/* Type explanation:
+		-- STANDING and TOWER:
+			These are the entites that the player uses.
+			The standing entities are the ones that defend the player
+			against the attackers. The tower is the entity to defend.
+
+		-- PRIVATE, BOMBER and FAST:
+			Attacking entities. The player should defend his tower from these.
+			They differ in health, speed and attack power.
+	*/
+
 	enum class EntityType
 	{
 		STANDING,
 		PRIVATE,
 		BOMBER,
-		FAST
+		FAST,
+		TOWER
 	};
 }
 

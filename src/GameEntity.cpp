@@ -40,6 +40,13 @@ logic::GameEntity::GameEntity(logic::EntityType type)
 			this->speed = STANDING_SPEED;
 			break;
 		}
+		case logic::EntityType::TOWER:
+		{
+			this->health = TOWER_HEALTH;
+			this->attackPower = TOWER_ATTACK;
+			this->speed = TOWER_SPEED;
+			break;
+		}
 		default: break;
 	}
 }
