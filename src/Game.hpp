@@ -3,10 +3,10 @@
 
 #include <vector>
 
-#include <Timer.hpp>
+#include <SFML/System.hpp>
 
-#include "Board.h"
-#include "GameEntity.h"
+#include "Board.hpp"
+#include "Entity.hpp"
 
 namespace logic
 {

@@ -4,8 +4,8 @@
 #include <vector>
 #include <cstdint>
 
-#include "defines.h"
-#include "GameEntity.h"
+#include "defines.hpp"
+#include "Entity.hpp"
 
 namespace logic
 {

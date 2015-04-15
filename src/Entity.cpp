@@ -1,5 +1,5 @@
-#include "GameEntity.h"
-#include "defines.h"
+#include "Entity.hpp"
+#include "defines.hpp"
 
 logic::GameEntity::GameEntity()
 {

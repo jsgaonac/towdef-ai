@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "Game.hpp"
 
 logic::Game::Game() : player(logic::EntityType::TOWER)
 {
