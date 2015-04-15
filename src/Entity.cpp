@@ -1,62 +1,56 @@
 #include "Entity.hpp"
 #include "defines.hpp"
 
-logic::GameEntity::GameEntity()
+logic::Entity::Entity()
 {
-	GameEntity(logic::EntityType::STANDING);
+	Entity(logic::EntityType::NONE);	
 }
 
-logic::GameEntity::GameEntity(logic::EntityType type)
+logic::Entity::Entity(logic::EntityType type)
 {
-	this->type = type;
-
-	switch(type)
-	{
-		case logic::EntityType::PRIVATE:
-		{
-			this->health = PRIVATE_HEALTH;
-			this->attackPower = PRIVATE_ATTACK;
-			this->speed = PRIVATE_SPEED;
-			break;
-		}
-		case logic::EntityType::BOMBER:
-		{
-			this->health = BOMBER_HEALTH;
-			this->attackPower = BOMBER_ATTACK;
-			this->speed = BOMBER_SPEED;
-			break;
-		}
-		case logic::EntityType::FAST:
-		{
-			this->health = FAST_HEALTH;
-			this->attackPower = FAST_ATTACK;
-			this->speed = FAST_SPEED;
-			break;
-		}
-		case logic::EntityType::STANDING:
-		{
-			this->health = STANDING_HEALTH;
-			this->attackPower = STANDING_ATTACK;
-			this->speed = STANDING_SPEED;
-			break;
-		}
-		case logic::EntityType::TOWER:
-		{
-			this->health = TOWER_HEALTH;
-			this->attackPower = TOWER_ATTACK;
-			this->speed = TOWER_SPEED;
-			break;
-		}
-		default: break;
-	}
+	init(type);
 }
 
-uint32_t logic::GameEntity::getHealth()
+int logic::Entity::getHealth()
 {
 	return health;
 }
 
-logic::EntityType logic::GameEntity::getType()
+int logic::Entity::getAttackPower()
 {
-	return type;
+	return attackPower;
+}
+
+int logic::Entity::getSpeed()
+{
+	return speed;
+}
+
+void logic::Entity::init(logic::EntityType type)
+{
+	switch (type)
+	{
+		case logic::EntityType::ATTACK:
+		{
+			health = ATTACK_HEALTH;
+			attackPower = ATTACK_POWER;
+			speed = ATTACK_SPEED;
+			break;
+		}
+		case logic::EntityType::DEFENSE:
+		{
+			health = DEFENSE_HEALTH;
+			attackPower = DEFENSE_POWER;
+			speed = DEFENSE_SPEED;
+			break;
+		}
+		case logic::EntityType::NONE:
+		{
+			health = 0;
+			attackPower = 0;
+			speed = 0;
+			break;
+		}
+		default: break;
+	}
 }

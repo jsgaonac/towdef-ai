@@ -1,8 +1,8 @@
 #include "Game.hpp"
 
-logic::Game::Game() : player(logic::EntityType::TOWER)
+logic::Game::Game()
 {
-	
+	// Do nothing.
 }
 
 void logic::Game::init()
@@ -10,7 +10,8 @@ void logic::Game::init()
 	currentRound = 0;
 	isRoundOver = false;
 
-	board.setPlayerAt(&player, BOARD_W - 1, BOARD_H - 1);
+	// Allocates 70 as maximum. We do not need more.
+	entityManager.allocateAttackers()
 
 	clock.restart();
 }
@@ -21,16 +22,7 @@ void logic::Game::initRound()
 	{
 		case 1:
 		{
-			// 10 attackers of 'private' class.
-			int attk = 10;
-
-			// There's no need to clear the vector since it's empty in round 1.
-
-			for (int i = 0; i < attk ; ++i)
-			{
-				attackers.push_back(logic::GameEntity(logic::EntityType::PRIVATE));
-			}
-			break;
+			
 		}
 	}
 

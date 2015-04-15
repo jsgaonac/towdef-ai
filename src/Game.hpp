@@ -7,6 +7,7 @@
 
 #include "Board.hpp"
 #include "Entity.hpp"
+#include "EntityManager.hpp"
 
 namespace logic
 {
@@ -15,12 +16,10 @@ namespace logic
 
 class logic::Game
 {
-	//Private:
+	//Private
 	logic::Board board;
-	logic::GameEntity player;
 
-	std::vector<logic::GameEntity> attackers;
-	std::vector<logic::GameEntity> defenders;
+	logic::EntityManager entityManager;
 
 	// Timer is used so game entities can move based on time elapsed.
 	sf::Clock clock;
@@ -37,9 +36,6 @@ class logic::Game
 
 	// Checks if the game or round is over and updates the state.
 	void updateState();
-
-	// Tells the attackers to 'move'.
-	void tellAttack();
 
 
 public:
