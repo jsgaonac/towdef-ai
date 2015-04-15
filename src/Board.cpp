@@ -23,7 +23,7 @@ bool logic::Board::setPlayerAt(logic::GameEntity* player, uint8_t x, uint8_t y)
 	return true;
 }
 
-bool logic::Board::moveEntity(GameEntity* ent, uint8_t srcX, uint8_t srcY, uint8_t dstX, uint8_t dstY)
+bool logic::Board::moveEntityTo(GameEntity* ent, uint8_t srcX, uint8_t srcY, uint8_t dstX, uint8_t dstY)
 {
 	if (!isCoordValid(srcX, srcY) || !isCoordValid(dstX, dstY)) return false;
 
@@ -32,7 +32,7 @@ bool logic::Board::moveEntity(GameEntity* ent, uint8_t srcX, uint8_t srcY, uint8
 		logic::EntityType type = board[srcX][srcY][0]->getType();
 
 		// Moving entities can occupy tiles with non-standing entities only.
-		if (type == logic::EntityType::STANDING || type == logic::EntityType::PLAYER)
+		if (type == logic::EntityType::STANDING || type == logic::EntityType::TOWER)
 		{
 			return false;
 		}

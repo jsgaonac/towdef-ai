@@ -1,0 +1,33 @@
+#ifndef _DEFINES_H_
+#define _DEFINES_H_
+
+#define SCREEN_W 640
+#define SCREEN_H 480
+
+#define MAX_ROUNDS 7
+
+#define BOARD_W 20
+#define BOARD_H 20
+
+#define STANDING_HEALTH 50
+#define STANDING_ATTACK 50
+#define STANDING_SPEED 0
+
+#define PRIVATE_HEALTH 150
+#define PRIVATE_ATTACK 100
+#define PRIVATE_SPEED 1
+
+#define BOMBER_HEALTH 200
+#define BOMBER_ATTACK 300
+#define BOMBER_SPEED 0.4
+
+#define FAST_HEALTH 150
+#define FAST_ATTACK 40
+#define FAST_SPEED 2
+
+#define TOWER_HEALTH 1500
+#define TOWER_ATTACK 0
+#define TOWER_SPEED 0
+
+
+#endif //_DEFINES_H_
