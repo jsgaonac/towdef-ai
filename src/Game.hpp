@@ -30,12 +30,17 @@ class logic::Game
 	// It is used to end the round loop.
 	bool isRoundOver;
 
+	// Allocates all the entities needed to start the game and sets the value to default.
 	void init();
 
+	// Every round is different, so in each round the entities will need to be initialized.
 	void initRound();
 
 	// Checks if the game or round is over and updates the state.
 	void updateState();
+
+	// Sets the position of the attackers to the respawn point.
+	void restartAttackers();
 
 
 public:

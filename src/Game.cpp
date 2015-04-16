@@ -10,8 +10,14 @@ void logic::Game::init()
 	currentRound = 0;
 	isRoundOver = false;
 
+	entityManager.allocatePlayer();
+
 	// Allocates 70 as maximum. We do not need more.
-	entityManager.allocateAttackers()
+	entityManager.allocateAttackers(70);
+
+	// Allocates 150. We may need more.
+	entityManager.allocateDefenders(150);
+
 
 	clock.restart();
 }

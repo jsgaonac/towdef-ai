@@ -44,6 +44,13 @@ void logic::Entity::init(logic::EntityType type)
 			speed = DEFENSE_SPEED;
 			break;
 		}
+		case logic::EntityType::PLAYER:
+		{
+			health = PLAYER_HEALTH;
+			power = PLAYER_POWER;
+			speed = PLAYER_SPEED;
+			break;
+		}
 		case logic::EntityType::NONE:
 		{
 			health = 0;

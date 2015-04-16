@@ -9,6 +9,7 @@ namespace logic
 	{
 		DEFENSE,
 		ATTACK,
+		PLAYER,
 		NONE
 	};
 }

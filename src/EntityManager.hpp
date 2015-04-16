@@ -15,7 +15,7 @@ class logic::EntityManager
 	//Private
 
 	// The player is an entity so it it managed by this class.
-	logic::Entity* player;
+	logic::Entity* playerPtr;
 	
 	// It is convenient to differentiate between
 	// attack and defense entities.
@@ -35,9 +35,18 @@ public:
 
 	EntityManager();
 
-	// Returns true if the n entities could be allocated.
+	// Allocates space for the n entities and initalizes all of them.
+	// Returns true on succes.
 	bool allocateAttackers(std::size_t n);
 	bool allocateDefenders(std::size_t n);
+
+	// This does not deallocate the memory if already allocated.
+	// Returns true if could allocate or if already allocated.
+	// False if error on allocation.
+	bool allocatePlayer();
+
+	// Re-init all the entities of the type to their default values.
+	void restartEntities(logic::EntityType type);
 
 	~EntityManager();
 

@@ -4,6 +4,7 @@ logic::EntityManager::EntityManager()
 {
 	attackersPool = nullptr;
 	defendersPool = nullptr;
+	playerPtr = nullptr;
 
 	attackersSize = 0;
 	defendersSize = 0;
@@ -57,6 +58,18 @@ bool logic::EntityManager::allocateDefenders(std::size_t n)
 	return false;
 }
 
+bool logic::EntityManager::allocatePlayer()
+{
+	if (playerPtr == nullptr)
+	{
+		playerPtr = new Entity(logic::EntityType::PLAYER);
+
+		if (playerPtr == nullptr) return false;
+	}
+
+	return true;
+}
+
 bool logic::EntityManager::allocate(logic::Entity* poolPtr, std::size_t n)
 {
 	if (poolPtr != nullptr)
@@ -81,11 +94,28 @@ void logic::EntityManager::initEntities(logic::Entity* poolPtr, std::size_t n, l
 	}
 }
 
+void logic::EntityManager::restartEntities(logic::EntityType type)
+{
+	switch (type)
+	{
+		case logic::EntityType::ATTACK:
+			initEntities(attackersPool, attackersSize, type); break;
+		case logic::EntityType::DEFENSE:
+			initEntities(defendersPool, defendersSize, type); break;
+		case logic::EntityType::PLAYER:
+			player->init(logic::EntityType::PLAYER);
+		default: break;
+	}
+}
+
 logic::EntityManager::~EntityManager()
 {
 	delete[] attackers;
 	delete[] defenders;
 
+	delete playerPtr;
+
 	attackers = nullptr;
 	defenders = nullptr;
+	playerPtr = nullptr;
 }
