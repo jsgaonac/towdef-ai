@@ -23,6 +23,11 @@ class logic::EntityManager
 	logic::Entity* attackersPool;
 	logic::Entity* defendersPool;
 
+	// Number of allocated resources.
+	std::size_t allocatedAttackers;
+	std::size_t allocatedDefenders;
+
+	// Number of used resources.
 	std::size_t attackersSize;
 	std::size_t defendersSize;
 
@@ -39,6 +44,11 @@ public:
 	// Returns true on succes.
 	bool allocateAttackers(std::size_t n);
 	bool allocateDefenders(std::size_t n);
+
+	// Sets the maximum of available entities. We may allocate 100 entities and
+	// make only 50 of them available with these methods.
+	void setAttackerSize(std::size_t n);
+	void setDefendersSize(std::size_t n);
 
 	// This does not deallocate the memory if already allocated.
 	// Returns true if could allocate or if already allocated.

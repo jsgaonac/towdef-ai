@@ -39,10 +39,6 @@ class logic::Game
 	// Checks if the game or round is over and updates the state.
 	void updateState();
 
-	// Sets the position of the attackers to the respawn point.
-	void restartAttackers();
-
-
 public:
 
 	Game();

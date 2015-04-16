@@ -28,7 +28,8 @@ void logic::Game::initRound()
 	{
 		case 1:
 		{
-			
+			entityManager.setAttackersSize(10);
+
 		}
 	}
 
@@ -39,14 +40,6 @@ void logic::Game::updateState()
 	// The round ends whether all the attackers have been destroyed 
 	// or the player's tower has been destroyed.
 	isRoundOver = attackers.size() == 0 || player.getHealth() <= 0;
-}
-
-void logic::Game::tellAttack()
-{
-	for (int i = 0; i < attackers.size(); ++i)
-	{
-		attackers[i].move(clock.getElapsedTime().asSeconds());
-	}
 }
 
 void logic::Game::run()

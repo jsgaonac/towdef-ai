@@ -14,48 +14,72 @@ bool logic::EntityManager::allocateAttackers(std::size_t n)
 {
 	// Do not allocate if the number of attackers
 	// is less or equal, just update the attackers size.
-	if (n <= attackersSize)
+	if (n <= allocatedAttackers)
 	{
-		attackersSize = n;
+		setAttackersSize(n);
 	}
 	else
+	{	// Allocate again.
+		bool success = allocate(attackersPool, n);
+
+		if (success)
+		{
+			allocatedAttackers = n;
+			initEntities(attackersPool, allocatedAttackers, logic::EntityType::ATTACK);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}	
+
+	return true;
+}
+
+void logic::EntityManager::setAttackerSize(std::size_t n)
+{
+	if (n <= allocatedAttackers)
 	{
-		// Allocate again.
 		attackersSize = n;
-		bool success = allocate(attackersPool, attackersSize);
 	}
+}
 
-	if (success)
+void logic::EntityManager::setDefendersSize(std::size_t n)
+{
+	if (n <= allocatedDefenders)
 	{
-		initEntities(attackersPool, attackersSize, logic::EntityType::ATTACK);
-		return true;
+		defendersSize = n;
 	}
-
-	return false;
 }
 
 bool logic::EntityManager::allocateDefenders(std::size_t n)
 {
 	// Do not allocate if the number of defenders
 	// is less, just update the defenders size.
-	if (n <= defendersSize)
+	if (n <= allocatedDefenders)
 	{
-		defendersSize = n;
+		setDefendersSize(n);
 	}
 	else
-	{
-		// Allocate again.
-		defendersSize = n;
-		bool success = allocate(defendersPool, defendersSize);
+	{		// Allocate again.
+		bool success = allocate(defendersPool, n);
+
+		if (success)
+		{
+			allocatedDefenders = n;
+			initEntities(defendersPool, allocatedDefenders, logic::EntityType::DEFENSE);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+
 	}
 
-	if (success)
-	{
-		initEntities(defendersPool, defendersSize, logic::EntityType::DEFENSE);
-		return true;
-	}
 
-	return false;
+	return true;
 }
 
 bool logic::EntityManager::allocatePlayer()
@@ -89,7 +113,7 @@ void logic::EntityManager::initEntities(logic::Entity* poolPtr, std::size_t n, l
 	{
 		for (std::size_t i = 0; i < n; ++i)
 		{
-			poolPtr[i]->init(type);		
+			poolPtr[i]->init(type);
 		}
 	}
 }

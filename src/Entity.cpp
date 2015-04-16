@@ -26,6 +26,27 @@ int logic::Entity::getSpeed()
 	return speed;
 }
 
+int logic::Entity::getPosX()
+{
+	return posX;
+}
+
+int logic::Entity::getPosY()
+{
+	return posY;
+}
+
+void logic::Entity::setPos(int x, int y)
+{
+	posX = x;
+	posY = y;
+}
+
+logic::EntityType logic::Entity::getType()
+{
+	return type;
+}
+
 void logic::Entity::init(logic::EntityType type)
 {
 	switch (type)
@@ -35,6 +56,9 @@ void logic::Entity::init(logic::EntityType type)
 			health = ATTACK_HEALTH;
 			attackPower = ATTACK_POWER;
 			speed = ATTACK_SPEED;
+			
+			posX = RESPAWN_X;
+			posY = RESPAWN_Y;
 			break;
 		}
 		case logic::EntityType::DEFENSE:
@@ -42,6 +66,9 @@ void logic::Entity::init(logic::EntityType type)
 			health = DEFENSE_HEALTH;
 			attackPower = DEFENSE_POWER;
 			speed = DEFENSE_SPEED;
+
+			posX = -1;
+			posY = -1;
 			break;
 		}
 		case logic::EntityType::PLAYER:
@@ -49,6 +76,9 @@ void logic::Entity::init(logic::EntityType type)
 			health = PLAYER_HEALTH;
 			power = PLAYER_POWER;
 			speed = PLAYER_SPEED;
+
+			posX = PLAYER_X;
+			posY = PLAYER_Y;
 			break;
 		}
 		case logic::EntityType::NONE:

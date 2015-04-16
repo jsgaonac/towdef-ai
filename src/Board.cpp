@@ -7,14 +7,14 @@ logic::Board::Board()
 
 }
 
-bool logic::Board::isCoordValid(uint8_t x, uint8_t y)
+bool logic::Board::isCoordValid(int x, int y)
 {
 	if (x >= BOARD_W || y >= BOARD_H) return false;
 
 	return true;
 }
 
-bool logic::Board::setPlayerAt(logic::GameEntity* player, uint8_t x, uint8_t y)
+bool logic::Board::setPlayerAt(logic::GameEntity* player, int x, int y)
 {
 	if (!isCoordValid(x, y)) return false;
 
@@ -23,28 +23,51 @@ bool logic::Board::setPlayerAt(logic::GameEntity* player, uint8_t x, uint8_t y)
 	return true;
 }
 
-bool logic::Board::moveEntityTo(GameEntity* ent, uint8_t srcX, uint8_t srcY, uint8_t dstX, uint8_t dstY)
+bool logic::Board::moveEntityTo(Entity* ent, int dstX, int dstY)
 {
+	int srcX = ent->getPosX();
+	int srcY = ent->getPosY();
+
+	// The coordinate must be a valid one.
 	if (!isCoordValid(srcX, srcY) || !isCoordValid(dstX, dstY)) return false;
 
-	if (!board[srcX][srcY].empty())
+	// In case the coordinate is occupied, check the type of the Entity occupying that place.
+	if (!board[dstX][dstY].empty())
 	{
-		logic::EntityType type = board[srcX][srcY][0]->getType();
+		logic::EntityType type = board[dstX][dstY][0]->getType();
 
-		// Moving entities can occupy tiles with non-standing entities only.
-		if (type == logic::EntityType::STANDING || type == logic::EntityType::TOWER)
+		// Only attacking entities can be in a same position.
+		if (type != logic::EntityType::ATTACK)
 		{
 			return false;
 		}
 	}
 
-	// The entity is added if the tile is empty or if the entities in the tile are movable.
+	// The entity is added if the tile is empty or if the entities in the tile are attackers.
 	board[dstX][dstY].push_back(ent);
+
+	// Update the new position of the entity.
+	ent->setPos(dstX, dstY);
+
+	// Search and remove the entity from the previous position (vector).
+	std::vector<Entity*> &previousPos = Board[srcX][srcY];
+
+	for (int i = 0; i < previousPos.size(); i++)
+	{
+		// If the moved entity was found, replace it with the last element in vector
+		// and pop the last element.
+		if (previousPos[i] == ent)
+		{
+			previousPos[i] = previousPos[previousPos.size() - 1];
+			previousPos.pop_back();
+			break;
+		}		
+	}
 	
 	return true;
 }
 
-const std::vector<logic::GameEntity*>* logic::Board::getEntitiesAt(uint8_t x, uint8_t y)
+const std::vector<logic::GameEntity*>* logic::Board::getEntitiesAt(int x, int y)
 {
 	if (!isCoordValid(x, y)) return nullptr;
 
