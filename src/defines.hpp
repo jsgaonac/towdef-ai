@@ -26,4 +26,8 @@
 #define PLAYER_X (BOARD_W - 1)
 #define PLAYER_Y (BOARD_H - 1)
 
+#define WINDOW_W 800
+#define WINDOW_H 600
+#define WINDOW_BPP 32
+
 #endif //_DEFINES_H_

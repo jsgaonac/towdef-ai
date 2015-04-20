@@ -74,7 +74,7 @@ void logic::Entity::init(logic::EntityType type)
 		case logic::EntityType::PLAYER:
 		{
 			health = PLAYER_HEALTH;
-			power = PLAYER_POWER;
+			attackPower = PLAYER_POWER;
 			speed = PLAYER_SPEED;
 
 			posX = PLAYER_X;

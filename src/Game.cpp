@@ -1,8 +1,8 @@
 #include "Game.hpp"
 
-logic::Game::Game()
+logic::Game::Game(ui::UI* uiInstance)
 {
-	// Do nothing.
+	uiPtr = uiInstance;
 }
 
 void logic::Game::init()
@@ -18,45 +18,35 @@ void logic::Game::init()
 	// Allocates 150. We may need more.
 	entityManager.allocateDefenders(150);
 
-
 	clock.restart();
+
+	uiPtr->setGameLoop(&logic::Game::gameLoop);
 }
 
 void logic::Game::initRound()
 {
-	switch (currentRound)
-	{
-		case 1:
-		{
-			entityManager.setAttackersSize(10);
-
-		}
-	}
-
+	
 }
 
 void logic::Game::updateState()
 {
-	// The round ends whether all the attackers have been destroyed 
-	// or the player's tower has been destroyed.
-	isRoundOver = attackers.size() == 0 || player.getHealth() <= 0;
+	
+}
+
+bool logic::Game::gameLoop()
+{
+	if (clock.getElapsedTime().asSeconds() > 10)
+	{
+		return false;
+	}
+
+	return true;
 }
 
 void logic::Game::run()
 {
 	init();
 
-	// Game-loop
-	while (player.getHealth() > 0 && currentRound < MAX_ROUNDS)
-	{
-		initRound();
-
-		while(!isRoundOver)
-		{
-			// TODO: make the movements time-based.
-			// TODO: make the attackers go to the player's tower.
-			updateState();
-		}
-	}
-
+	uiPtr->create(WINDOW_W, WINDOW_H, WINDOW_BPP);
+	uiPtr->show(this);
 }

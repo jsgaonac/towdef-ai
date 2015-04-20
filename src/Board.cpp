@@ -14,7 +14,7 @@ bool logic::Board::isCoordValid(int x, int y)
 	return true;
 }
 
-bool logic::Board::setPlayerAt(logic::GameEntity* player, int x, int y)
+bool logic::Board::setPlayerAt(logic::Entity* player, int x, int y)
 {
 	if (!isCoordValid(x, y)) return false;
 
@@ -50,9 +50,9 @@ bool logic::Board::moveEntityTo(Entity* ent, int dstX, int dstY)
 	ent->setPos(dstX, dstY);
 
 	// Search and remove the entity from the previous position (vector).
-	std::vector<Entity*> &previousPos = Board[srcX][srcY];
+	std::vector<Entity*> &previousPos = board[srcX][srcY];
 
-	for (int i = 0; i < previousPos.size(); i++)
+	for (std::size_t i = 0; i < previousPos.size(); i++)
 	{
 		// If the moved entity was found, replace it with the last element in vector
 		// and pop the last element.
@@ -67,7 +67,7 @@ bool logic::Board::moveEntityTo(Entity* ent, int dstX, int dstY)
 	return true;
 }
 
-const std::vector<logic::GameEntity*>* logic::Board::getEntitiesAt(int x, int y)
+const std::vector<logic::Entity*>* logic::Board::getEntitiesAt(int x, int y)
 {
 	if (!isCoordValid(x, y)) return nullptr;
 

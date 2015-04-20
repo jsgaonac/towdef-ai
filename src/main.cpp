@@ -1,24 +1,16 @@
 #include <SFML/Graphics.hpp>
 
+#include "Game.hpp"
+#include "GraphicalUI.hpp"
+
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "TowDef AI");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    ui::UI* uiInstance = new ui::GraphicalUI;
+    logic::Game gameInstance(uiInstance);
+    
+    gameInstance.run();
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }
-
+    delete uiInstance;
+    
     return 0;
 }

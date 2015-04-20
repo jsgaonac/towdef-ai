@@ -27,7 +27,7 @@ public:
 	Board();
 
 	// Returns true if the entity can move to position dst.
-	bool moveEntityTo(Entity* ent, int dstX, int dstY)
+	bool moveEntityTo(Entity* ent, int dstX, int dstY);
 
 	// Initializes player position.
 	bool setPlayerAt(logic::Entity* player, int x, int y);

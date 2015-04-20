@@ -7,7 +7,7 @@
 
 namespace logic
 {
-	EntityManager;
+	class EntityManager;
 }
 
 class logic::EntityManager
@@ -47,7 +47,7 @@ public:
 
 	// Sets the maximum of available entities. We may allocate 100 entities and
 	// make only 50 of them available with these methods.
-	void setAttackerSize(std::size_t n);
+	void setAttackersSize(std::size_t n);
 	void setDefendersSize(std::size_t n);
 
 	// This does not deallocate the memory if already allocated.
