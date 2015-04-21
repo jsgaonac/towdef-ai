@@ -14,6 +14,8 @@ class ui::GraphicalUI : public ui::UI
 {
 	sf::RenderWindow renderWindow;
 
+	void drawBoard();
+
 	bool windowExists;
 
 public:
