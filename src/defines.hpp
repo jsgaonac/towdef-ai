@@ -3,8 +3,8 @@
 
 #define MAX_ROUNDS 7
 
-#define BOARD_W 15
-#define BOARD_H 15
+#define BOARD_W 10
+#define BOARD_H 10
 
 #define ATTACK_HEALTH 50
 #define ATTACK_POWER 50

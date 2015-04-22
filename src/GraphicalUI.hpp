@@ -5,14 +5,36 @@
 
 #include "UI.hpp"
 
+#include <string>
+
 namespace ui
 {
 	class GraphicalUI;
+	struct Sprite
+	{
+		sf::Sprite sprite;
+		sf::Texture texture;
+
+		bool loadAndSetTexture(std::string filename)
+		{
+			bool ret = texture.loadFromFile(filename);
+
+			sprite.setTexture(texture);
+
+			return ret;
+		}	
+	};
 }
 
 class ui::GraphicalUI : public ui::UI
 {
 	sf::RenderWindow renderWindow;
+
+	ui::Sprite respawn;
+	ui::Sprite tower;
+
+	sf::Texture attackers;
+	sf::Texture defenders;
 
 	void drawBoard();
 
