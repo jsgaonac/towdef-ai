@@ -25,6 +25,7 @@ bool logic::EntityManager::allocateAttackers(std::size_t n)
 		if (success)
 		{
 			allocatedAttackers = n;
+			setAttackersSize(n);
 			initEntities(attackersPool, allocatedAttackers, logic::EntityType::ATTACK);
 			return true;
 		}
@@ -68,6 +69,7 @@ bool logic::EntityManager::allocateDefenders(std::size_t n)
 		if (success)
 		{
 			allocatedDefenders = n;
+			setDefendersSize(n);
 			initEntities(defendersPool, allocatedDefenders, logic::EntityType::DEFENSE);
 			return true;
 		}
@@ -77,7 +79,6 @@ bool logic::EntityManager::allocateDefenders(std::size_t n)
 		}
 
 	}
-
 
 	return true;
 }

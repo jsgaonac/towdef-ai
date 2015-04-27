@@ -37,8 +37,11 @@ class logic::Game
 	// Allocates all the entities needed to start the game and sets their values to their default.
 	void init();
 
-	// Every round is different, so in each round the entities will need to be initialized.
-	void initRound();
+	// Every round is different, so in each round (in case there are more than one)
+	// the entities will need to be initialized.
+	// It also 'reads' the provided gen and 'puts' the player defense tower in the given
+	// position.
+	void initRound(std::vector<bool>& gen);
 
 	// Checks if the game or round is over and updates the state.
 	void updateState();
@@ -54,7 +57,9 @@ public:
 
 	Game(ui::UI* uiInstance);
 
-	void run();	
+	void run();
+
+	float getScoreFromGen(std::vector<bool>& gen);
 	
 };
 

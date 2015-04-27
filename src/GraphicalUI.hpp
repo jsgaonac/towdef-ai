@@ -20,6 +20,7 @@ namespace ui
 			bool ret = texture.loadFromFile(filename);
 
 			sprite.setTexture(texture);
+			texture.setSmooth(true);
 
 			return ret;
 		}	

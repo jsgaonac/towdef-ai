@@ -22,29 +22,29 @@ ui::GraphicalUI::GraphicalUI()
     float gridH = WINDOW_H / BOARD_H;
     float gridW = WINDOW_W / BOARD_W;
 
-    float scaleFactor = 0.8;
+    float scaleFactor = 0.5;
     
     // We multiply by a constant factor to make it a little bit smaller.
     float scaleX = (1 / (respawn.texture.getSize().x / gridW)) * scaleFactor;
     float scaleY = (1 / (respawn.texture.getSize().y / gridH)) * scaleFactor;
 
-    respawn.sprite.setScale(scaleX, scaleY);
+    respawn.sprite.scale(scaleX, scaleY);
 
     // We center the sprite.
     respawn.sprite.setPosition(
-        (gridW - respawn.texture.getSize().x * scaleX) / 2,
-        (gridH - respawn.texture.getSize().y * scaleY) / 2
+        (gridW - respawn.texture.getSize().x * scaleX) * 0.5,
+        (gridH - respawn.texture.getSize().y * scaleY) * 0.5
         );
 
     // We multiply by a constant factor to make it a little bit smaller.
     scaleX = (1 / (tower.texture.getSize().x / gridW)) * scaleFactor;
     scaleY = (1 / (tower.texture.getSize().y / gridH)) * scaleFactor;
 
-    tower.sprite.setScale(scaleX, scaleY);
+    tower.sprite.scale(scaleX, scaleY);
 
     tower.sprite.setPosition(
-        100 - (gridW - tower.texture.getSize().x * scaleX) / 2,
-        100 - (gridH - tower.texture.getSize().y * scaleY) / 2
+        WINDOW_W - (gridW + tower.texture.getSize().x * scaleX) * 0.5,
+        WINDOW_H - (gridH + tower.texture.getSize().y * scaleY) * 0.5
         );
 }
 
@@ -59,7 +59,7 @@ void ui::GraphicalUI::create(int w, int h, int bpp)
 
 void ui::GraphicalUI::drawBoard()
 {
-    float lineThickness = 2;
+    float lineThickness = 1.5;
 
     sf::RectangleShape lineH(sf::Vector2f(WINDOW_W, lineThickness));
     sf::RectangleShape lineV(sf::Vector2f(lineThickness, WINDOW_H));
@@ -67,7 +67,7 @@ void ui::GraphicalUI::drawBoard()
     lineH.setFillColor(sf::Color::Black);
     lineV.setFillColor(sf::Color::Black);
 
-    renderWindow.clear(sf::Color::White);
+    renderWindow.clear(sf::Color(229, 229, 229));
 
     // The space between each horizontal and vertical line.
     float lineHSpace = WINDOW_H / BOARD_H;

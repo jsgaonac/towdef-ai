@@ -9,23 +9,24 @@ void logic::Game::init()
 {
 	currentRound = 0;
 	isRoundOver = false;
-
+	
 	entityManager.allocatePlayer();
 
-	// Allocates 70 as maximum. We do not need more.
-	entityManager.allocateAttackers(70);
+	entityManager.allocateAttackers(50);
 
-	// Allocates 150. We may need more.
-	entityManager.allocateDefenders(150);
+	entityManager.allocateDefenders(100);
 
 	clock.restart();
 
 	uiPtr->setGameLoop(&logic::Game::gameLoop);
 }
 
-void logic::Game::initRound()
+void logic::Game::initRound(std::vector<bool>& gen)
 {
-	
+	for (int i = 0; i < gen.size(); i++)
+	{
+		board.
+	}
 }
 
 void logic::Game::updateState()

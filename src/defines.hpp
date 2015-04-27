@@ -1,7 +1,7 @@
 #ifndef _DEFINES_H_
 #define _DEFINES_H_
 
-#define MAX_ROUNDS 7
+#define MAX_ROUNDS 1
 
 #define BOARD_W 10
 #define BOARD_H 10
