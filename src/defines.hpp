@@ -30,4 +30,7 @@
 #define WINDOW_H 600
 #define WINDOW_BPP 32
 
+#define GRID_W ((float)WINDOW_W / BOARD_W)
+#define GRID_H ((float)WINDOW_H / BOARD_H)
+
 #endif //_DEFINES_H_

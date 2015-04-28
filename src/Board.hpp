@@ -20,20 +20,23 @@ class logic::Board
 	std::vector<logic::Entity*> board[BOARD_W][BOARD_H];
 
 	// Returns true if coordinates exist.
-	bool isCoordValid(int x, int y);
+	bool isCoordValid(int x, int y) const;
+
+	void removeEntityAt(logic::Entity* ent, int x, int y);
 
 public:
 
 	Board();
 
 	// Returns true if the entity can move to position dst.
+	// It also removes the entity from it previous position.
 	bool moveEntityTo(Entity* ent, int dstX, int dstY);
 
 	// Initializes player position.
 	bool setPlayerAt(logic::Entity* player, int x, int y);
 
 	// Returns a vector of entities, at the position (x, y) of the board.
-	const std::vector<logic::Entity*>* getEntitiesAt(int x, int y);
+	const std::vector<logic::Entity*>* getEntitiesAt(int x, int y) const;
 };
 
 

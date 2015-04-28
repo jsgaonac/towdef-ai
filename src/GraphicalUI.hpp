@@ -34,10 +34,12 @@ class ui::GraphicalUI : public ui::UI
 	ui::Sprite respawn;
 	ui::Sprite tower;
 
-	sf::Texture attackers;
-	sf::Texture defenders;
+	ui::Sprite attackers;
+	ui::Sprite defenders;
 
 	void drawBoard();
+
+	void drawEntities(logic::Game* gameInstance);
 
 	bool windowExists;
 

@@ -34,6 +34,9 @@ class logic::Game
 	// It is used to end the round loop.
 	bool isRoundOver;
 
+	// Stores the score of the game.
+	float score;
+
 	// Allocates all the entities needed to start the game and sets their values to their default.
 	void init();
 
@@ -57,9 +60,9 @@ public:
 
 	Game(ui::UI* uiInstance);
 
-	void run();
+	float run(std::vector<bool>& gen);
 
-	float getScoreFromGen(std::vector<bool>& gen);
+	const logic::Board& getBoard();
 	
 };
 

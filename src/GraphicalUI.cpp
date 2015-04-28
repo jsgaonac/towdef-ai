@@ -1,5 +1,7 @@
 #include "GraphicalUI.hpp"
 #include "defines.hpp"
+#include "Board.hpp"
+#include "Game.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -19,33 +21,51 @@ ui::GraphicalUI::GraphicalUI()
         std::cout << "No se pudo cargar tower.png!" << std::endl;
     }
 
-    float gridH = WINDOW_H / BOARD_H;
-    float gridW = WINDOW_W / BOARD_W;
+    if (!attackers.loadAndSetTexture("../assets/attackers.png"))
+    {
+        std::cout << "No se pudo cargar attackers.png!" << std::endl;
+    }
+
+    if (!defenders.loadAndSetTexture("../assets/defenders.png"))
+    {
+        std::cout << "No se pudo cargar defenders.png!" << std::endl;
+    }
 
     float scaleFactor = 0.5;
     
     // We multiply by a constant factor to make it a little bit smaller.
-    float scaleX = (1 / (respawn.texture.getSize().x / gridW)) * scaleFactor;
-    float scaleY = (1 / (respawn.texture.getSize().y / gridH)) * scaleFactor;
+    float scaleX = (1 / (respawn.texture.getSize().x / GRID_W)) * scaleFactor;
+    float scaleY = (1 / (respawn.texture.getSize().y / GRID_H)) * scaleFactor;
 
     respawn.sprite.scale(scaleX, scaleY);
 
     // We center the sprite.
     respawn.sprite.setPosition(
-        (gridW - respawn.texture.getSize().x * scaleX) * 0.5,
-        (gridH - respawn.texture.getSize().y * scaleY) * 0.5
+        (GRID_W - respawn.texture.getSize().x * scaleX) * 0.5,
+        (GRID_H - respawn.texture.getSize().y * scaleY) * 0.5
         );
 
     // We multiply by a constant factor to make it a little bit smaller.
-    scaleX = (1 / (tower.texture.getSize().x / gridW)) * scaleFactor;
-    scaleY = (1 / (tower.texture.getSize().y / gridH)) * scaleFactor;
+    scaleX = (1 / (tower.texture.getSize().x / GRID_W)) * scaleFactor;
+    scaleY = (1 / (tower.texture.getSize().y / GRID_H)) * scaleFactor;
 
     tower.sprite.scale(scaleX, scaleY);
 
     tower.sprite.setPosition(
-        WINDOW_W - (gridW + tower.texture.getSize().x * scaleX) * 0.5,
-        WINDOW_H - (gridH + tower.texture.getSize().y * scaleY) * 0.5
+        WINDOW_W - (GRID_W + tower.texture.getSize().x * scaleX) * 0.5,
+        WINDOW_H - (GRID_H + tower.texture.getSize().y * scaleY) * 0.5
         );
+
+    scaleX = (1 / (attackers.texture.getSize().x / GRID_W)) * scaleFactor;
+    scaleY = (1 / (attackers.texture.getSize().y / GRID_H)) * scaleFactor;
+
+    attackers.sprite.scale(scaleX, scaleY);
+
+
+    scaleX = (1 / (defenders.texture.getSize().x / GRID_W)) * scaleFactor;
+    scaleY = (1 / (defenders.texture.getSize().y / GRID_H)) * scaleFactor;
+
+    defenders.sprite.scale(scaleX, scaleY);
 }
 
 void ui::GraphicalUI::create(int w, int h, int bpp)
@@ -123,8 +143,50 @@ void ui::GraphicalUI::show(logic::Game* gameInstance)
         // draw everything here...
 
         drawBoard();
+        drawEntities(gameInstance);
 
         // end the current frame
         renderWindow.display();
+    }
+}
+
+void ui::GraphicalUI::drawEntities(logic::Game* gameInstance)
+{
+    sf::Vector2f attScale = attackers.sprite.getScale();
+    
+    sf::Vector2f defScale = attackers.sprite.getScale();
+
+    const logic::Board& board = gameInstance->getBoard();
+
+    for (int i = 0; i < BOARD_W; i++)
+    {
+        for (int j = 0; j < BOARD_H; j++)
+        {
+            const std::vector<logic::Entity*>* entities = board.getEntitiesAt(i, j);
+
+            if (entities == nullptr) continue;
+
+            if (entities->size() != 0)
+            {
+                if ((*entities)[0]->getType() == logic::EntityType::ATTACK)
+                {
+                    attackers.sprite.setPosition(
+                        (i * GRID_W) + (GRID_W - attackers.texture.getSize().x * attScale.x) * 0.5,
+                        (j * GRID_H) + (GRID_H - attackers.texture.getSize().y * attScale.y) * 0.5
+                        );
+
+                    renderWindow.draw(attackers.sprite);
+                }
+                else if ((*entities)[0]->getType() == logic::EntityType::DEFENSE)
+                {
+                    defenders.sprite.setPosition(
+                        (i * GRID_W) + (GRID_W - defenders.texture.getSize().x * defScale.x) * 0.5,
+                        (j * GRID_H) + (GRID_H - defenders.texture.getSize().y * defScale.y) * 0.5
+                        );
+
+                    renderWindow.draw(defenders.sprite);
+                }
+            }
+        }
     }
 }

@@ -6,11 +6,14 @@ logic::EntityManager::EntityManager()
 	defendersPool = nullptr;
 	playerPtr = nullptr;
 
+	allocatedDefenders = -1;
+	allocatedAttackers = -1;
+
 	attackersSize = 0;
 	defendersSize = 0;
 }
 
-bool logic::EntityManager::allocateAttackers(std::size_t n)
+bool logic::EntityManager::allocateAttackers(int n)
 {
 	// Do not allocate if the number of attackers
 	// is less or equal, just update the attackers size.
@@ -20,7 +23,7 @@ bool logic::EntityManager::allocateAttackers(std::size_t n)
 	}
 	else
 	{	// Allocate again.
-		bool success = allocate(attackersPool, n);
+		bool success = allocate(&attackersPool, n);
 
 		if (success)
 		{
@@ -38,7 +41,7 @@ bool logic::EntityManager::allocateAttackers(std::size_t n)
 	return true;
 }
 
-void logic::EntityManager::setAttackersSize(std::size_t n)
+void logic::EntityManager::setAttackersSize(int n)
 {
 	if (n <= allocatedAttackers)
 	{
@@ -46,7 +49,7 @@ void logic::EntityManager::setAttackersSize(std::size_t n)
 	}
 }
 
-void logic::EntityManager::setDefendersSize(std::size_t n)
+void logic::EntityManager::setDefendersSize(int n)
 {
 	if (n <= allocatedDefenders)
 	{
@@ -54,7 +57,7 @@ void logic::EntityManager::setDefendersSize(std::size_t n)
 	}
 }
 
-bool logic::EntityManager::allocateDefenders(std::size_t n)
+bool logic::EntityManager::allocateDefenders(int n)
 {
 	// Do not allocate if the number of defenders
 	// is less, just update the defenders size.
@@ -64,7 +67,7 @@ bool logic::EntityManager::allocateDefenders(std::size_t n)
 	}
 	else
 	{		// Allocate again.
-		bool success = allocate(defendersPool, n);
+		bool success = allocate(&defendersPool, n);
 
 		if (success)
 		{
@@ -95,24 +98,24 @@ bool logic::EntityManager::allocatePlayer()
 	return true;
 }
 
-bool logic::EntityManager::allocate(logic::Entity* poolPtr, std::size_t n)
+bool logic::EntityManager::allocate(logic::Entity** poolPtr, int n)
 {
-	if (poolPtr != nullptr)
+	if (*poolPtr != nullptr)
 	{
-		delete[] poolPtr;
-		poolPtr = nullptr;
+		delete[] *poolPtr;
+		*poolPtr = nullptr;
 	}
 
-	poolPtr = new Entity[n];
+	*poolPtr = new Entity[n];
 
-	return poolPtr == nullptr ? false : true;
+	return *poolPtr == nullptr ? false : true;
 }
 
-void logic::EntityManager::initEntities(logic::Entity* poolPtr, std::size_t n, logic::EntityType type)
+void logic::EntityManager::initEntities(logic::Entity* poolPtr, int n, logic::EntityType type)
 {
 	if (poolPtr != nullptr)
 	{
-		for (std::size_t i = 0; i < n; ++i)
+		for (int i = 0; i < n; ++i)
 		{
 			poolPtr[i].init(type);
 		}
@@ -130,6 +133,30 @@ void logic::EntityManager::restartEntities(logic::EntityType type)
 		case logic::EntityType::PLAYER:
 			playerPtr->init(logic::EntityType::PLAYER);
 		default: break;
+	}
+}
+
+void logic::EntityManager::updateAttackers(logic::Board& board)
+{
+
+}
+
+void logic::EntityManager::placeDefendersOnBoard(logic::Board& board, std::vector<bool>& gen)
+{
+	int count = 0;
+
+	for (unsigned int i = 0; i < gen.size(); i++)
+	{
+		if (gen[i] == 0) continue;
+
+		int x = i % BOARD_W;
+		int y = i / BOARD_H;
+
+		defendersPool[count].setPos(x, y);
+
+		board.moveEntityTo(&defendersPool[count], x, y);
+
+		count++;
 	}
 }
 

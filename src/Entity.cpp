@@ -49,6 +49,8 @@ logic::EntityType logic::Entity::getType()
 
 void logic::Entity::init(logic::EntityType type)
 {
+	this->type = type;
+	
 	switch (type)
 	{
 		case logic::EntityType::ATTACK:
