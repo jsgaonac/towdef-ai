@@ -191,7 +191,7 @@ void ui::GraphicalUI::drawDefenders(logic::Game* gameInstance)
     }
 }
 
-void logic::GraphicalUI::drawAttackers(logic::Game *gameInstance)
+void ui::GraphicalUI::drawAttackers(logic::Game *gameInstance)
 {
     
 }

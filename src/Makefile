@@ -9,7 +9,7 @@ LFLAGS = -Wall -L/usr/local/lib -lsfml-graphics -lsfml-window -lsfml-system
 towdef.out : $(OBJS)
 	$(CC) $(OBJS) -o towdef.out $(LFLAGS) 
 
-main.o : main.cpp
+main.o : main.cpp Game.hpp GraphicalUI.hpp Util.hpp
 	$(CC) $(CFLAGS) main.cpp
 
 Game.o : Game.hpp Game.cpp Board.hpp Entity.hpp UI.hpp EntityManager.hpp

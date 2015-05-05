@@ -1,5 +1,7 @@
 #include "Game.hpp"
 
+#include "findpath.hpp"
+
 #include <iostream>
 
 logic::Game::Game(ui::UI* uiInstance)
@@ -34,6 +36,8 @@ void logic::Game::init()
 void logic::Game::initRound(std::vector<bool>& gen)
 {
 	entityManager.placeDefendersOnBoard(board, gen);
+
+	calculateShortestPath(gen);
 }
 
 void logic::Game::updateState()
@@ -43,7 +47,7 @@ void logic::Game::updateState()
 
 bool logic::Game::gameLoop()
 {
-	if (clock.getElapsedTime().asSeconds() > 10)
+	if (clock.getElapsedTime().asSeconds() > 120)
 	{
 		return false;
 	}

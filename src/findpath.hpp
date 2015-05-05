@@ -56,7 +56,7 @@ int GetMap( int x, int y )
 
 void transformGen(std::vector<bool> &gen)
 {
-	for (int i = 0; i < gen.size(); ++i)
+	for (std::size_t i = 0; i < gen.size(); ++i)
 	{
 		world_map[i] = gen[i] == 0 ? 0 : 9;		
 	}
