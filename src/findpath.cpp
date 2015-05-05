@@ -6,6 +6,8 @@
 // Finding a path on a simple grid maze
 // This shows how to do shortest path finding using A*
 
+// Some of the code was modified to adapt it to towdef-ai data.
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "stlastar.h" // See header for copyright and usage information
@@ -14,8 +16,11 @@
 #include <stdio.h>
 #include <math.h>
 
+#include "defines.hpp"
+
 #define DEBUG_LISTS 0
 #define DEBUG_LIST_LENGTHS_ONLY 0
+#define DISPLAY_SOLUTION 0
 
 using namespace std;
 
@@ -23,35 +28,15 @@ using namespace std;
 
 // The world map
 
-const int MAP_WIDTH = 20;
-const int MAP_HEIGHT = 20;
+const int MAP_WIDTH = BOARD_W;
+const int MAP_HEIGHT = BOARD_H;
 
-int world_map[ MAP_WIDTH * MAP_HEIGHT ] = 
-{
-
-// 0001020304050607080910111213141516171819
-	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,   // 00
-	1,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,1,   // 01
-	1,9,9,1,1,9,9,9,1,9,1,9,1,9,1,9,9,9,1,1,   // 02
-	1,9,9,1,1,9,9,9,1,9,1,9,1,9,1,9,9,9,1,1,   // 03
-	1,9,1,1,1,1,9,9,1,9,1,9,1,1,1,1,9,9,1,1,   // 04
-	1,9,1,1,9,1,1,1,1,9,1,1,1,1,9,1,1,1,1,1,   // 05
-	1,9,9,9,9,1,1,1,1,1,1,9,9,9,9,1,1,1,1,1,   // 06
-	1,9,9,9,9,9,9,9,9,1,1,1,9,9,9,9,9,9,9,1,   // 07
-	1,9,1,1,1,1,1,1,1,1,1,9,1,1,1,1,1,1,1,1,   // 08
-	1,9,1,9,9,9,9,9,9,9,1,1,9,9,9,9,9,9,9,1,   // 09
-	1,9,1,1,1,1,9,1,1,9,1,1,1,1,1,1,1,1,1,1,   // 10
-	1,9,9,9,9,9,1,9,1,9,1,9,9,9,9,9,1,1,1,1,   // 11
-	1,9,1,9,1,9,9,9,1,9,1,9,1,9,1,9,9,9,1,1,   // 12
-	1,9,1,9,1,9,9,9,1,9,1,9,1,9,1,9,9,9,1,1,   // 13
-	1,9,1,1,1,1,9,9,1,9,1,9,1,1,1,1,9,9,1,1,   // 14
-	1,9,1,1,9,1,1,1,1,9,1,1,1,1,9,1,1,1,1,1,   // 15
-	1,9,9,9,9,1,1,1,1,1,1,9,9,9,9,1,1,1,1,1,   // 16
-	1,1,9,9,9,9,9,9,9,1,1,1,9,9,9,1,9,9,9,9,   // 17
-	1,9,1,1,1,1,1,1,1,1,1,9,1,1,1,1,1,1,1,1,   // 18
-	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,   // 19
-
-};
+// Our sample problem defines the world as a 2d array representing a terrain
+	// Each element contains an integer from 0 to 5 which indicates the cost 
+	// of travel across the terrain. Zero means the least possible difficulty 
+	// in travelling (think ice rink if you can skate) whilst 5 represents the 
+	// most difficult. 9 indicates that we cannot pass.
+int world_map[ MAP_WIDTH * MAP_HEIGHT ];
 
 // map helper functions
 
@@ -69,7 +54,13 @@ int GetMap( int x, int y )
 	return world_map[(y*MAP_WIDTH)+x];
 }
 
-
+void transformGen(std::vector<bool> &gen)
+{
+	for (int i = 0; i < gen.size(); ++i)
+	{
+		world_map[i] = gen[i] == 0 ? 0 : 9;		
+	}
+}
 
 // Definitions
 
@@ -205,20 +196,11 @@ float MapSearchNode::GetCost( MapSearchNode &successor )
 }
 
 
-// Main
-
-int main( int argc, char *argv[] )
+void calculateShortestPath(std::vector<bool> &gen)
 {
 
-	cout << "STL A* Search implementation\n(C)2001 Justin Heyes-Jones\n";
-
-	// Our sample problem defines the world as a 2d array representing a terrain
-	// Each element contains an integer from 0 to 5 which indicates the cost 
-	// of travel across the terrain. Zero means the least possible difficulty 
-	// in travelling (think ice rink if you can skate) whilst 5 represents the 
-	// most difficult. 9 indicates that we cannot pass.
-
 	// Create an instance of the search class...
+	transformGen(gen);
 
 	AStarSearch<MapSearchNode> astarsearch;
 
@@ -231,13 +213,13 @@ int main( int argc, char *argv[] )
 
 		// Create a start state
 		MapSearchNode nodeStart;
-		nodeStart.x = rand()%MAP_WIDTH;
-		nodeStart.y = rand()%MAP_HEIGHT; 
+		nodeStart.x = RESPAWN_X;
+		nodeStart.y = RESPAWN_Y; 
 
 		// Define the goal state
 		MapSearchNode nodeEnd;
-		nodeEnd.x = rand()%MAP_WIDTH;						
-		nodeEnd.y = rand()%MAP_HEIGHT; 
+		nodeEnd.x = PLAYER_X;						
+		nodeEnd.y = PLAYER_Y; 
 		
 		// Set Start and goal states
 		
@@ -338,7 +320,6 @@ int main( int argc, char *argv[] )
 		astarsearch.EnsureMemoryFreed();
 	}
 	
-	return 0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
