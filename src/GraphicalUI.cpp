@@ -143,14 +143,14 @@ void ui::GraphicalUI::show(logic::Game* gameInstance)
         // draw everything here...
 
         drawBoard();
-        drawEntities(gameInstance);
+        drawDefenders(gameInstance);
 
         // end the current frame
         renderWindow.display();
     }
 }
 
-void ui::GraphicalUI::drawEntities(logic::Game* gameInstance)
+void ui::GraphicalUI::drawDefenders(logic::Game* gameInstance)
 {
     sf::Vector2f attScale = attackers.sprite.getScale();
     
@@ -189,4 +189,9 @@ void ui::GraphicalUI::drawEntities(logic::Game* gameInstance)
             }
         }
     }
+}
+
+void logic::GraphicalUI::drawAttackers(logic::Game *gameInstance)
+{
+    
 }
