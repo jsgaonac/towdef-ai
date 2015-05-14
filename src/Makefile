@@ -6,7 +6,7 @@ DEBUG = -g
 CFLAGS = -Wall -std=c++11 -c $(DEBUG)
 LFLAGS = -Wall -L/usr/local/lib -lsfml-graphics -lsfml-window -lsfml-system
 
-towdef.out : $(OBJS)
+all : $(OBJS)
 	$(CC) $(OBJS) -o towdef.out $(LFLAGS) 
 
 main.o : main.cpp Game.hpp GraphicalUI.hpp Util.hpp
