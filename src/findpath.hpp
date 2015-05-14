@@ -54,11 +54,11 @@ int GetMap( int x, int y )
 	return world_map[(y*MAP_WIDTH)+x];
 }
 
-void transformGen(std::vector<bool> &gen)
+void transformCromosome(std::vector<bool> &crom)
 {
-	for (std::size_t i = 0; i < gen.size(); ++i)
+	for (std::size_t i = 0; i < crom.size(); ++i)
 	{
-		world_map[i] = gen[i] == 0 ? 0 : 9;		
+		world_map[i] = crom[i] == 0 ? 0 : 9;		
 	}
 }
 
@@ -196,11 +196,11 @@ float MapSearchNode::GetCost( MapSearchNode &successor )
 }
 
 
-void calculateShortestPath(std::vector<bool> &gen)
+void calculateShortestPath(std::vector<bool> &crom)
 {
 
 	// Create an instance of the search class...
-	transformGen(gen);
+	transformCromosome(crom);
 
 	AStarSearch<MapSearchNode> astarsearch;
 

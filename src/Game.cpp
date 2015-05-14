@@ -33,11 +33,11 @@ void logic::Game::init()
 
 }
 
-void logic::Game::initRound(std::vector<bool>& gen)
+void logic::Game::initRound(std::vector<bool>& cromosome)
 {
-	entityManager.placeDefendersOnBoard(board, gen);
+	entityManager.placeDefendersOnBoard(board, cromosome);
 
-	calculateShortestPath(gen);
+	calculateShortestPath(cromosome);
 }
 
 void logic::Game::updateState()
@@ -55,10 +55,10 @@ bool logic::Game::gameLoop()
 	return true;
 }
 
-float logic::Game::run(std::vector<bool>& gen)
+float logic::Game::run(std::vector<bool>& cromosome)
 {
 	init();
-	initRound(gen);
+	initRound(cromosome);
 
 	uiPtr->create(WINDOW_W, WINDOW_H, WINDOW_BPP);
 	uiPtr->show(this);

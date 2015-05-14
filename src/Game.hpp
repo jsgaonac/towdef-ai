@@ -60,7 +60,7 @@ public:
 
 	Game(ui::UI* uiInstance);
 
-	float run(std::vector<bool>& gen);
+	float run(std::vector<bool>& cromosome);
 
 	const logic::Board& getBoard();
 	
