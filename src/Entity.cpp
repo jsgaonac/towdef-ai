@@ -11,27 +11,27 @@ logic::Entity::Entity(logic::EntityType type)
 	init(type);
 }
 
-int logic::Entity::getHealth()
+int logic::Entity::getHealth() const
 {
 	return health;
 }
 
-int logic::Entity::getAttackPower()
+int logic::Entity::getAttackPower() const
 {
 	return attackPower;
 }
 
-int logic::Entity::getSpeed()
+int logic::Entity::getSpeed() const
 {
 	return speed;
 }
 
-int logic::Entity::getPosX()
+int logic::Entity::getPosX() const
 {
 	return posX;
 }
 
-int logic::Entity::getPosY()
+int logic::Entity::getPosY() const
 {
 	return posY;
 }
@@ -42,7 +42,7 @@ void logic::Entity::setPos(int x, int y)
 	posY = y;
 }
 
-logic::EntityType logic::Entity::getType()
+logic::EntityType logic::Entity::getType() const
 {
 	return type;
 }

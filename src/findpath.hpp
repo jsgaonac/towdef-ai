@@ -20,7 +20,6 @@
 
 #define DEBUG_LISTS 0
 #define DEBUG_LIST_LENGTHS_ONLY 0
-#define DISPLAY_SOLUTION 0
 
 using namespace std;
 
@@ -79,7 +78,7 @@ public:
 	float GetCost( MapSearchNode &successor );
 	bool IsSameState( MapSearchNode &rhs );
 
-	void PrintNodeInfo(); 
+	Point PrintNodeInfo(); 
 
 
 };
@@ -100,12 +99,16 @@ bool MapSearchNode::IsSameState( MapSearchNode &rhs )
 
 }
 
-void MapSearchNode::PrintNodeInfo()
+Point MapSearchNode::PrintNodeInfo()
 {
+	Point p(x, y);
+
 	char str[100];
 	sprintf( str, "Node position : (%d,%d)\n", x,y );
 
 	cout << str;
+
+	return p;
 }
 
 // Here's the heuristic function that estimates the distance from a Node
@@ -196,7 +199,7 @@ float MapSearchNode::GetCost( MapSearchNode &successor )
 }
 
 
-void calculateShortestPath(std::vector<bool> &crom)
+void calculateShortestPath(std::vector<bool> &crom, std::vector<Point> &pointsList)
 {
 
 	// Create an instance of the search class...
@@ -284,7 +287,10 @@ void calculateShortestPath(std::vector<bool> &crom)
 	#endif
 				int steps = 0;
 
-				node->PrintNodeInfo();
+				Point p = node->PrintNodeInfo();
+
+				pointsList.push_back(p);
+
 				for( ;; )
 				{
 					node = astarsearch.GetSolutionNext();
@@ -294,7 +300,8 @@ void calculateShortestPath(std::vector<bool> &crom)
 						break;
 					}
 
-					node->PrintNodeInfo();
+					p = node->PrintNodeInfo();
+					pointsList.push_back(p);
 					steps ++;
 				
 				};

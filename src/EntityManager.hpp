@@ -56,6 +56,8 @@ public:
 	// False if error on allocation.
 	bool allocatePlayer();
 
+	const logic::Entity* getPlayer();
+
 	// Re-init all the entities of the type to their default values.
 	void restartEntities(logic::EntityType type);
 

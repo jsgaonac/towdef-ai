@@ -139,6 +139,7 @@ void logic::EntityManager::restartEntities(logic::EntityType type)
 void logic::EntityManager::updateAttackers(logic::Board& board)
 {
 
+
 }
 
 void logic::EntityManager::placeDefendersOnBoard(logic::Board& board, std::vector<bool>& gen)
@@ -158,6 +159,11 @@ void logic::EntityManager::placeDefendersOnBoard(logic::Board& board, std::vecto
 
 		count++;
 	}
+}
+
+const logic::Entity* logic::EntityManager::getPlayer()
+{
+	return playerPtr;
 }
 
 logic::EntityManager::~EntityManager()

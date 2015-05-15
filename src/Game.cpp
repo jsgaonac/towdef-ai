@@ -17,7 +17,7 @@ void logic::Game::init()
 	
 	entityManager.allocatePlayer();
 
-	if (!entityManager.allocateAttackers(50))
+	if (!entityManager.allocateAttackers(30))
 	{
 		std::cout << "Atacantes => No se pudo asignar memoria." << std::endl;
 	}
@@ -35,21 +35,33 @@ void logic::Game::init()
 
 void logic::Game::initRound(std::vector<bool>& cromosome)
 {
+	activeAttackers = 30;
+
 	entityManager.placeDefendersOnBoard(board, cromosome);
 
-	calculateShortestPath(cromosome);
+	calculateShortestPath(cromosome, shortestPath);
+
+	if (shortestPath.size() == 0)
+	{
+		std::cout << "No hay camino!" << std::endl;
+	}
 }
 
 void logic::Game::updateState()
 {
+	if (activeAttackers == 0 || entityManager.getPlayer()->getHealth() <= 0)
+	{
+		isRoundOver = true;
+	} 
 	
 }
 
 bool logic::Game::gameLoop()
 {
-	if (clock.getElapsedTime().asSeconds() > 120)
+	if (!isRoundOver)
 	{
-		return false;
+		entityManager.updateAttackers(board);
+		updateState();
 	}
 
 	return true;

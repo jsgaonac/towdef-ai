@@ -1,6 +1,19 @@
 #ifndef _DEFINES_H_
 #define _DEFINES_H_
 
+struct Point
+{
+	int x;
+	int y;
+
+	Point(int _x, int _y)
+	{
+		x = _x;
+		y = _y;
+	}
+};
+
+
 #define MAX_ROUNDS 1
 
 #define BOARD_W 10

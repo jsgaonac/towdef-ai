@@ -37,6 +37,13 @@ class logic::Game
 	// Stores the score of the game.
 	float score;
 
+	/* Stores how many attackers are alive */
+	int activeAttackers;
+
+	/* Stores the map coordinates of the shortest path from the respawn point 
+	 	to the player tower */
+	std::vector<Point> shortestPath;
+
 	// Allocates all the entities needed to start the game and sets their values to their default.
 	void init();
 
@@ -44,7 +51,7 @@ class logic::Game
 	// the entities will need to be initialized.
 	// It also 'reads' the provided gen and 'puts' the player defense tower in the given
 	// position.
-	void initRound(std::vector<bool>& gen);
+	void initRound(std::vector<bool>& cromosome);
 
 	// Checks if the game or round is over and updates the state.
 	void updateState();

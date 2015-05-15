@@ -32,16 +32,16 @@ public:
 	Entity();
 	Entity(logic::EntityType type);
 	
-	int getHealth();
-	int getAttackPower();
-	int getSpeed();
+	int getHealth() const;
+	int getAttackPower() const;
+	int getSpeed() const;
 
-	int getPosX();
-	int getPosY();
+	int getPosX() const;
+	int getPosY() const;
 
 	void setPos(int x, int y);
 
-	logic::EntityType getType();
+	logic::EntityType getType() const;
 
 	void init(logic::EntityType type);
 
