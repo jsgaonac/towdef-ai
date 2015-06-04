@@ -25,6 +25,9 @@ class logic::Game
 
 	logic::EntityManager entityManager;
 
+	// Mimimum elapsed time required to update the game.
+	int ticks;
+
 	// Timer is used so game entities can move based on time.
 	sf::Clock clock;
 
@@ -67,7 +70,11 @@ public:
 
 	Game(ui::UI* uiInstance);
 
-	float run(std::vector<bool>& cromosome);
+	/* Takes the cromosome representing the defenders positions and the speed at which
+	 the game will run, in milliseconds.
+	 If speed_ms = 500, each 500 ms the game will update. If speed_ms = 0 the game
+	 will update at each loop. */
+	float run(std::vector<bool>& cromosome, int speed_ms);
 
 	const logic::Board& getBoard();
 	

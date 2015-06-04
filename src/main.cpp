@@ -9,15 +9,13 @@ int main()
     ui::UI* uiInstance = new ui::GraphicalUI;
     logic::Game gameInstance(uiInstance);
 
-    std::vector<bool> gen;
+    std::vector<bool> crom;
 
-    generateRandomGen(gen, 100);
+    generateRandomCrom(crom, 100);
     
-    gameInstance.run(gen);
+    gameInstance.run(crom, 1000);
 
     delete uiInstance;
-
-
     
     return 0;
 }

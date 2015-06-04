@@ -60,15 +60,24 @@ bool logic::Game::gameLoop()
 {
 	if (!isRoundOver)
 	{
-		entityManager.updateAttackers(board);
-		updateState();
-	}
+		if (clock.getElapsedTime().asMilliseconds() >= ticks)
+		{
+			entityManager.updateAttackers(board);
+			updateState();
 
-	return true;
+			clock.restart();
+		}
+
+		return true;		
+	}
+	
+	return false;
 }
 
-float logic::Game::run(std::vector<bool>& cromosome)
+float logic::Game::run(std::vector<bool>& cromosome, int speed_ms)
 {
+	ticks = speed_ms;
+
 	init();
 	initRound(cromosome);
 

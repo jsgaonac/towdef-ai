@@ -138,17 +138,17 @@ void logic::EntityManager::restartEntities(logic::EntityType type)
 
 void logic::EntityManager::updateAttackers(logic::Board& board)
 {
-
+	
 
 }
 
-void logic::EntityManager::placeDefendersOnBoard(logic::Board& board, std::vector<bool>& gen)
+void logic::EntityManager::placeDefendersOnBoard(logic::Board& board, std::vector<bool>& crom)
 {
 	int count = 0;
 
-	for (unsigned int i = 0; i < gen.size(); i++)
+	for (unsigned int i = 0; i < crom.size(); i++)
 	{
-		if (gen[i] == 0) continue;
+		if (crom[i] == 0) continue;
 
 		int x = i % BOARD_W;
 		int y = i / BOARD_H;
