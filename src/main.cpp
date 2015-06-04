@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 #include "Game.hpp"
 #include "GraphicalUI.hpp"
@@ -13,7 +14,7 @@ int main()
 
     generateRandomCrom(crom, 100);
     
-    gameInstance.run(crom, 300);
+    std::cout << "Score: " << gameInstance.run(crom, 300) << std::endl;
 
     delete uiInstance;
     

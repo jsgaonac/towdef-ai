@@ -64,6 +64,9 @@ public:
 	// Returns the number of not-dead attackers.
 	int getNumberOfAttackers();
 
+	// Return the number of towers placed.
+	int getNumberOfTowers();
+
 	// Tells the entities to update their state on the board.
 	void updateAttackers(logic::Board& board, const std::vector<Point> &shortestPath);
 

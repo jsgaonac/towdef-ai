@@ -263,6 +263,11 @@ int logic::EntityManager::getNumberOfAttackers()
 	return count;
 }
 
+int logic::EntityManager::getNumberOfTowers()
+{
+	return defendersSize;
+}
+
 logic::EntityManager::~EntityManager()
 {
 	delete[] attackersPool;

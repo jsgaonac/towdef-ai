@@ -6,6 +6,9 @@
 #define BOARD_W 10
 #define BOARD_H 10
 
+#define ATTACKERS_ALLOC 20
+#define DEFENDERS_ALLOC 100
+
 #define ATTACK_HEALTH 200
 #define ATTACK_POWER 50
 #define ATTACK_SPEED 1
@@ -32,5 +35,19 @@
 
 #define GRID_W ((float)WINDOW_W / BOARD_W)
 #define GRID_H ((float)WINDOW_H / BOARD_H)
+
+// Score points.
+
+#define ADD_DESTROY_POINTS 145
+#define ADD_LIFE_POINTS 2
+
+#define SUB_LIFE_POINTS 1.5
+#define SUB_NUMBER_OF_TOWERS 20
+#define SUB_RESPAWN_BLOCK 1000
+#define SUB_TOWER_BLOCK 1500
+#define SUB_BLOCK_PATH 2000
+
+// This value depends on the previous values.
+#define NORM_VALUE 4500
 
 #endif //_DEFINES_H_

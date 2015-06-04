@@ -2,7 +2,7 @@
 
 std::random_device rd;
 std::mt19937 mt(rd());
-std::uniform_int_distribution<short> dis(0, 9);
+std::uniform_int_distribution<short> dis(1, 10);
 
 void generateRandomCrom(std::vector<bool> &crom, std::size_t length)
 {
