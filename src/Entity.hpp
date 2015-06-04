@@ -1,7 +1,7 @@
 #ifndef _GAME_ENTITY_H_
 #define _GAME_ENTITY_H_
 
-#include "defines.hpp"
+#include "Util.hpp"
 
 namespace logic
 {

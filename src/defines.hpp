@@ -1,38 +1,20 @@
 #ifndef _DEFINES_H_
 #define _DEFINES_H_
 
-struct Point
-{
-	int x;
-	int y;
-
-	Point(int _x, int _y)
-	{
-		x = _x;
-		y = _y;
-	}
-
-	bool operator==(const Point &q)
-	{
-		return x == q.x && y == q.y;
-	}
-};
-
-
 #define MAX_ROUNDS 1
 
 #define BOARD_W 10
 #define BOARD_H 10
 
-#define ATTACK_HEALTH 50
+#define ATTACK_HEALTH 200
 #define ATTACK_POWER 50
 #define ATTACK_SPEED 1
 
 #define DEFENSE_HEALTH  100
-#define DEFENSE_POWER 15
+#define DEFENSE_POWER 10
 #define DEFENSE_SPEED 1
 
-#define PLAYER_HEALTH 500
+#define PLAYER_HEALTH 1000
 #define PLAYER_POWER 1000
 #define PLAYER_SPEED 0
 

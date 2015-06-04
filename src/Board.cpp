@@ -8,6 +8,7 @@ logic::Board::Board()
 bool logic::Board::isCoordValid(int x, int y) const
 {
 	if (x >= BOARD_W || y >= BOARD_H) return false;
+	if (x < 0 || y < 0) return false;
 
 	return true;
 }

@@ -1,5 +1,6 @@
 #include "EntityManager.hpp"
 #include "defines.hpp"
+#include "Util.hpp"
 
 logic::EntityManager::EntityManager()
 {
@@ -141,11 +142,57 @@ void logic::EntityManager::restartEntities(logic::EntityType type)
 
 void logic::EntityManager::updateAttackers(logic::Board& board, const std::vector<Point> &sp)
 {
+	/* Updating is done in two parts:
+		For each attacker still alive:
+		1. Check for nearby towers in all four directions.
+			If a tower is found, decrease the life of the attacker.
+		2. Move the attacker to the next tile, based on the shortest path.
+	*/
+
 	for (int i = 0; i < attackersSize; i++)
 	{
 		if (attackersPool[i].getHealth() <= 0) continue;
 
 		Point currentPos = attackersPool[i].getPosition();
+
+		Point periph[4];
+
+		periph[0].x = currentPos.x;
+		periph[0].y = currentPos.y - 1;
+
+		periph[1].x = currentPos.x - 1;
+		periph[1].y = currentPos.y;
+
+		periph[2].x = currentPos.x + 1;
+		periph[2].y = currentPos.y;
+
+		periph[3].x = currentPos.x;
+		periph[3].y = currentPos.y + 1;
+
+		for (int h = 0; h < 4; h++)
+		{
+			const std::vector<logic::Entity*>* entities = nullptr;
+
+			entities = board.getEntitiesAt(periph[h].x, periph[h].y);
+
+			if (entities == nullptr) continue;
+
+			if(entities->size() > 0)
+			{
+				if ((*entities)[0]->getType() == logic::EntityType::DEFENSE)
+				{
+					attackersPool[i].setHealth(
+						attackersPool[i].getHealth() - (*entities)[0]->getAttackPower());
+				}
+			}
+
+		}
+
+		if (defendersPool[i].getHealth() < 0)
+		{
+			board.removeEntityAt(&defendersPool[i], currentPos.x, currentPos.y);
+			continue;
+		}
 
 		for (std::size_t j = 0; j < sp.size(); j++)
 		{
@@ -207,7 +254,7 @@ int logic::EntityManager::getNumberOfAttackers()
 
 	for (int i = 0; i < attackersSize; i++)
 	{
-		if (attackersPool[i].getHealth() >= 0)
+		if (attackersPool[i].getHealth() > 0)
 		{
 			count++;
 		}
