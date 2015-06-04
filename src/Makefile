@@ -1,7 +1,7 @@
 #Makefile para construir towdef-ai
 
 CC = g++
-OBJS = main.o Game.o Board.o Entity.o EntityManager.o UI.o GraphicalUI.o
+OBJS = main.o Game.o Board.o Entity.o EntityManager.o UI.o GraphicalUI.o Util.o
 DEBUG = -g
 CFLAGS = -Wall -std=c++11 -c $(DEBUG)
 LFLAGS = -Wall -L/usr/local/lib -lsfml-graphics -lsfml-window -lsfml-system
@@ -29,6 +29,9 @@ UI.o : UI.hpp UI.cpp
 
 GraphicalUI.o : GraphicalUI.hpp GraphicalUI.cpp defines.hpp UI.hpp
 	$(CC) $(CFLAGS) GraphicalUI.cpp 
+
+Util.o : Util.hpp Util.cpp
+	$(CC) $(CFLAGS) Util.cpp
 
 clean:
 	\rm *.o towdef.out

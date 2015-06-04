@@ -3,26 +3,30 @@
 
 #include <random>
 
-std::random_device rd;
-std::mt19937 mt(rd());
-std::uniform_int_distribution<short> dis(0, 9);
-
-
-void generateRandomCrom(std::vector<bool> &crom, std::size_t length)
+struct Point
 {
-	for (std::size_t i = 0; i < length; ++i)
-	{
-		int j = dis(mt);
+	int x;
+	int y;
 
-		if( j <= 7)
-		{
-			crom.push_back(0);
-		}
-		else
-		{
-			crom.push_back(1);
-		}
+	Point()
+	{
+		x = 0;
+		y = 0;
 	}
-}
+
+	Point(int _x, int _y)
+	{
+		x = _x;
+		y = _y;
+	}
+
+	bool operator==(const Point &q)
+	{
+		return x == q.x && y == q.y;
+	}
+};
+
+
+void generateRandomCrom(std::vector<bool> &crom, std::size_t length);
 
 #endif
