@@ -44,12 +44,6 @@ void logic::Game::initRound(std::vector<bool>& cromosome)
 		std::cout << "No hay camino!" << std::endl;
 		isRoundOver = true;
 
-		// If the tower is blocked.
-		if(cromosome[cromosome.size() - 1] == 1)
-		{
-			score -= SUB_TOWER_BLOCK;
-		}
-
 		// There's no path, so penalize.
 		score -= SUB_BLOCK_PATH;
 	}
@@ -96,16 +90,28 @@ float logic::Game::run(std::vector<bool>& cromosome, int speed_ms)
 	uiPtr->create(WINDOW_W, WINDOW_H, WINDOW_BPP);
 	uiPtr->show(this);
 
+	int playerLife = entityManager.getPlayer()->getHealth();
+
 	// Give points for each attacker killed.
 	score +=  (ATTACKERS_ALLOC - entityManager.getNumberOfAttackers()) * ADD_DESTROY_POINTS;
 
 	// Give points for each unit of life.
-	score += ((PLAYER_HEALTH - entityManager.getPlayer()->getHealth()) * ADD_LIFE_POINTS);
+	score += ((PLAYER_HEALTH - playerLife) * ADD_LIFE_POINTS);
 
 	// Take points for each tower placed.
 	score -= (entityManager.getNumberOfTowers() * SUB_NUMBER_OF_TOWERS);
 
-	return score / NORM_VALUE;
+	if (playerLife <= 0)
+	{
+		score -= SUB_TOWER_DESTROYED;
+	}
+
+	float scoreNormalized = (score - MIN_VALUE) / (MAX_VALUE - MIN_VALUE);
+
+	std::cout << "Player Life: " << playerLife << std::endl;
+	std::cout << "Score: " << score << "; " << scoreNormalized << std::endl;
+
+	return scoreNormalized;
 }
 
 const logic::Board& logic::Game::getBoard()

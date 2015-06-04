@@ -14,7 +14,7 @@ int main()
 
     generateRandomCrom(crom, 100);
     
-    std::cout << "Score: " << gameInstance.run(crom, 300) << std::endl;
+    gameInstance.run(crom, 300);
 
     delete uiInstance;
     
