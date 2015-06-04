@@ -132,6 +132,14 @@ void ui::GraphicalUI::show(logic::Game* gameInstance)
             // "close requested" event: we close the renderWindow
             if (event.type == sf::Event::Closed)
                 renderWindow.close();
+            
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::Q)
+                {
+                    renderWindow.close();
+                }
+            }
         }
 
         // We execute the game loop from the logic part of the game.
