@@ -1,4 +1,5 @@
 #include "EntityManager.hpp"
+#include "defines.hpp"
 
 logic::EntityManager::EntityManager()
 {
@@ -28,7 +29,9 @@ bool logic::EntityManager::allocateAttackers(int n)
 		if (success)
 		{
 			allocatedAttackers = n;
-			setAttackersSize(n);
+			// We set it to 1 because only 1 attackers will be active at the
+			// beginning. Each tock this number will be incremented.
+			setAttackersSize(1);
 			initEntities(attackersPool, allocatedAttackers, logic::EntityType::ATTACK);
 			return true;
 		}
@@ -136,13 +139,42 @@ void logic::EntityManager::restartEntities(logic::EntityType type)
 	}
 }
 
-void logic::EntityManager::updateAttackers(logic::Board& board)
+void logic::EntityManager::updateAttackers(logic::Board& board, const std::vector<Point> &sp)
 {
-	
+	for (int i = 0; i < attackersSize; i++)
+	{
+		if (attackersPool[i].getHealth() <= 0) continue;
 
+		Point currentPos = attackersPool[i].getPosition();
+
+		for (std::size_t j = 0; j < sp.size(); j++)
+		{
+			if (currentPos == sp[j])
+			{
+				// Check if the position is next to the player tower.
+				if (j == sp.size() - 2)
+				{
+					// Don't move the attacker to the player position
+					// but kill the attacker and update the tower health.
+
+					playerPtr->setHealth(playerPtr->getHealth()
+					 - attackersPool[i].getAttackPower());
+
+					attackersPool[i].setHealth(0);
+				}
+				else
+				{
+					board.moveEntityTo(&attackersPool[i], sp[j + 1].x, sp[j + 1].y);
+				}
+			}
+		}
+	}
+
+	// Introduce a new attacker in the next tick.
+	setAttackersSize(attackersSize + 1);
 }
 
-void logic::EntityManager::placeDefendersOnBoard(logic::Board& board, std::vector<bool>& crom)
+void logic::EntityManager::placeDefendersOnBoard(logic::Board& board, std::vector<bool> &crom)
 {
 	int count = 0;
 
@@ -153,17 +185,34 @@ void logic::EntityManager::placeDefendersOnBoard(logic::Board& board, std::vecto
 		int x = i % BOARD_W;
 		int y = i / BOARD_H;
 
-		defendersPool[count].setPos(x, y);
+		defendersPool[count].setPosition(x, y);
 
 		board.moveEntityTo(&defendersPool[count], x, y);
 
 		count++;
 	}
+
+	setDefendersSize(count);
 }
 
 const logic::Entity* logic::EntityManager::getPlayer()
 {
 	return playerPtr;
+}
+
+int logic::EntityManager::getNumberOfAttackers()
+{
+	int count = 0;
+
+	for (int i = 0; i < attackersSize; i++)
+	{
+		if (attackersPool[i].getHealth() <= 0)
+		{
+			count++;
+		}
+	}
+
+	return count;
 }
 
 logic::EntityManager::~EntityManager()

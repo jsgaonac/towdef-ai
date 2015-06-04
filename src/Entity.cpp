@@ -26,20 +26,20 @@ int logic::Entity::getSpeed() const
 	return speed;
 }
 
-int logic::Entity::getPosX() const
+Point logic::Entity::getPosition() const
 {
-	return posX;
+	return Point(posX, posY);
 }
 
-int logic::Entity::getPosY() const
-{
-	return posY;
-}
-
-void logic::Entity::setPos(int x, int y)
+void logic::Entity::setPosition(int x, int y)
 {
 	posX = x;
 	posY = y;
+}
+
+void logic::Entity::setHealth(int health)
+{
+	this->health = health;
 }
 
 logic::EntityType logic::Entity::getType() const

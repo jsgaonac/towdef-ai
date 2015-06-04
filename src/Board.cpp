@@ -2,9 +2,7 @@
 
 logic::Board::Board()
 {
-	// Setting player position.
-
-
+	
 }
 
 bool logic::Board::isCoordValid(int x, int y) const
@@ -25,8 +23,8 @@ bool logic::Board::setPlayerAt(logic::Entity* player, int x, int y)
 
 bool logic::Board::moveEntityTo(Entity* ent, int dstX, int dstY)
 {
-	int srcX = ent->getPosX();
-	int srcY = ent->getPosY();
+	int srcX = ent->getPosition().x;
+	int srcY = ent->getPosition().y;
 
 	removeEntityAt(ent, srcX, srcY);
 
@@ -49,7 +47,7 @@ bool logic::Board::moveEntityTo(Entity* ent, int dstX, int dstY)
 	board[dstX][dstY].push_back(ent);
 
 	// Update the new position of the entity.
-	ent->setPos(dstX, dstY);
+	ent->setPosition(dstX, dstY);
 
 	return true;
 }

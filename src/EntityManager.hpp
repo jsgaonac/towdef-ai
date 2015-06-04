@@ -61,8 +61,11 @@ public:
 	// Re-init all the entities of the type to their default values.
 	void restartEntities(logic::EntityType type);
 
+	// Returns the number of not-dead attackers.
+	int getNumberOfAttackers();
+
 	// Tells the entities to update their state on the board.
-	void updateAttackers(logic::Board& board);
+	void updateAttackers(logic::Board& board, const std::vector<Point> &shortestPath);
 
 	// Iterates through all the active defenders and puts them on the board.
 	// This is needed to be called only once, since the defenders do not move.

@@ -11,6 +11,11 @@ struct Point
 		x = _x;
 		y = _y;
 	}
+
+	bool operator==(const Point &q)
+	{
+		return x == q.x && y == q.y;
+	}
 };
 
 

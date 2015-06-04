@@ -40,9 +40,6 @@ class logic::Game
 	// Stores the score of the game.
 	float score;
 
-	/* Stores how many attackers are alive */
-	int activeAttackers;
-
 	/* Stores the map coordinates of the shortest path from the respawn point 
 	 	to the player tower */
 	std::vector<Point> shortestPath;

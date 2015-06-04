@@ -1,6 +1,8 @@
 #ifndef _GAME_ENTITY_H_
 #define _GAME_ENTITY_H_
 
+#include "defines.hpp"
+
 namespace logic
 {
 	class Entity;
@@ -36,10 +38,11 @@ public:
 	int getAttackPower() const;
 	int getSpeed() const;
 
-	int getPosX() const;
-	int getPosY() const;
+	Point getPosition() const;
 
-	void setPos(int x, int y);
+	void setPosition(int x, int y);
+
+	void setHealth(int health);
 
 	logic::EntityType getType() const;
 

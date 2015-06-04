@@ -35,8 +35,6 @@ void logic::Game::init()
 
 void logic::Game::initRound(std::vector<bool>& cromosome)
 {
-	activeAttackers = 30;
-
 	entityManager.placeDefendersOnBoard(board, cromosome);
 
 	calculateShortestPath(cromosome, shortestPath);
@@ -49,11 +47,10 @@ void logic::Game::initRound(std::vector<bool>& cromosome)
 
 void logic::Game::updateState()
 {
-	if (activeAttackers == 0 || entityManager.getPlayer()->getHealth() <= 0)
+	if (/*entityManager.getNumberOfAttackers() == 0 ||*/ entityManager.getPlayer()->getHealth() <= 0)
 	{
 		isRoundOver = true;
 	} 
-	
 }
 
 bool logic::Game::gameLoop()
@@ -62,7 +59,7 @@ bool logic::Game::gameLoop()
 	{
 		if (clock.getElapsedTime().asMilliseconds() >= ticks)
 		{
-			entityManager.updateAttackers(board);
+			entityManager.updateAttackers(board, shortestPath);
 			updateState();
 
 			clock.restart();
