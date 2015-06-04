@@ -6,7 +6,7 @@
 #define BOARD_W 10
 #define BOARD_H 10
 
-#define ATTACKERS_ALLOC 20
+#define ATTACKERS_ALLOC 40
 #define DEFENDERS_ALLOC 100
 
 #define ATTACK_HEALTH 200
@@ -38,17 +38,17 @@
 
 // Score points.
 
-#define ADD_DESTROY_POINTS 145
-#define ADD_LIFE_POINTS 2
+#define ADD_DESTROY_POINTS 150
+#define ADD_LIFE_POINTS 3
 
-#define SUB_LIFE_POINTS 2.5
-#define SUB_NUMBER_OF_TOWERS 10
+#define SUB_LIFE_POINTS 3.5
+#define SUB_NUMBER_OF_TOWERS 20
 #define SUB_RESPAWN_BLOCK 2000
 #define SUB_BLOCK_PATH 15000
 #define SUB_TOWER_DESTROYED 5000
 
 // This value depends on the previous values.
-#define MAX_VALUE 4500
+#define MAX_VALUE 8600
 #define MIN_VALUE -15000
 
 #endif //_DEFINES_H_

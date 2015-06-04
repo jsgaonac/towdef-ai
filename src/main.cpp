@@ -14,7 +14,7 @@ int main()
 
     generateRandomCrom(crom, 100);
     
-    gameInstance.run(crom, 300);
+    gameInstance.run(crom, 100);
 
     delete uiInstance;
     
