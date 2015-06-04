@@ -151,14 +151,14 @@ void ui::GraphicalUI::show(logic::Game* gameInstance)
         // draw everything here...
 
         drawBoard();
-        drawDefenders(gameInstance);
+        drawEntities(gameInstance);
 
         // end the current frame
         renderWindow.display();
     }
 }
 
-void ui::GraphicalUI::drawDefenders(logic::Game* gameInstance)
+void ui::GraphicalUI::drawEntities(logic::Game* gameInstance)
 {
     sf::Vector2f attScale = attackers.sprite.getScale();
     
@@ -178,12 +178,15 @@ void ui::GraphicalUI::drawDefenders(logic::Game* gameInstance)
             {
                 if ((*entities)[0]->getType() == logic::EntityType::ATTACK)
                 {
-                    attackers.sprite.setPosition(
-                        (i * GRID_W) + (GRID_W - attackers.texture.getSize().x * attScale.x) * 0.5,
-                        (j * GRID_H) + (GRID_H - attackers.texture.getSize().y * attScale.y) * 0.5
-                        );
+                    if ((*entities)[0]->getHealth() > 0)
+                    {
+                        attackers.sprite.setPosition(
+                            (i * GRID_W) + (GRID_W - attackers.texture.getSize().x * attScale.x) * 0.5,
+                            (j * GRID_H) + (GRID_H - attackers.texture.getSize().y * attScale.y) * 0.5
+                            );
 
-                    renderWindow.draw(attackers.sprite);
+                        renderWindow.draw(attackers.sprite);
+                    }
                 }
                 else if ((*entities)[0]->getType() == logic::EntityType::DEFENSE)
                 {
@@ -199,7 +202,5 @@ void ui::GraphicalUI::drawDefenders(logic::Game* gameInstance)
     }
 }
 
-void ui::GraphicalUI::drawAttackers(logic::Game *gameInstance)
-{
-    
-}
+
+

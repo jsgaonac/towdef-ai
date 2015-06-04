@@ -39,9 +39,7 @@ class ui::GraphicalUI : public ui::UI
 
 	void drawBoard();
 
-	void drawDefenders(logic::Game *gameInstance);
-
-	void drawAttackers(logic::Game *gameInstance);
+	void drawEntities(logic::Game *gameInstance);
 
 	bool windowExists;
 

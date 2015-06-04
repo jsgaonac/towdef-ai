@@ -22,11 +22,12 @@ class logic::Board
 	// Returns true if coordinates exist.
 	bool isCoordValid(int x, int y) const;
 
-	void removeEntityAt(logic::Entity* ent, int x, int y);
 
 public:
 
 	Board();
+
+	void removeEntityAt(logic::Entity* ent, int x, int y);
 
 	// Returns true if the entity can move to position dst.
 	// It also removes the entity from it previous position.

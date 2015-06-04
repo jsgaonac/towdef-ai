@@ -161,6 +161,7 @@ void logic::EntityManager::updateAttackers(logic::Board& board, const std::vecto
 					 - attackersPool[i].getAttackPower());
 
 					attackersPool[i].setHealth(0);
+					board.removeEntityAt(&attackersPool[i], currentPos.x, currentPos.y);
 				}
 				else
 				{
@@ -206,7 +207,7 @@ int logic::EntityManager::getNumberOfAttackers()
 
 	for (int i = 0; i < attackersSize; i++)
 	{
-		if (attackersPool[i].getHealth() <= 0)
+		if (attackersPool[i].getHealth() >= 0)
 		{
 			count++;
 		}

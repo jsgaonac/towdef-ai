@@ -17,7 +17,7 @@ void logic::Game::init()
 	
 	entityManager.allocatePlayer();
 
-	if (!entityManager.allocateAttackers(30))
+	if (!entityManager.allocateAttackers(5))
 	{
 		std::cout << "Atacantes => No se pudo asignar memoria." << std::endl;
 	}
@@ -47,7 +47,7 @@ void logic::Game::initRound(std::vector<bool>& cromosome)
 
 void logic::Game::updateState()
 {
-	if (/*entityManager.getNumberOfAttackers() == 0 ||*/ entityManager.getPlayer()->getHealth() <= 0)
+	if (entityManager.getNumberOfAttackers() == 0 || entityManager.getPlayer()->getHealth() <= 0)
 	{
 		isRoundOver = true;
 	} 
