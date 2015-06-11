@@ -38,17 +38,17 @@
 
 // Score points.
 
-#define ADD_DESTROY_POINTS 150
-#define ADD_LIFE_POINTS 3
+#define ADD_DESTROY_POINTS 150 	// Give points for each enemy destroyed.
+#define ADD_LIFE_POINTS 3 		// Give points for each life point kept.
 
-#define SUB_LIFE_POINTS 3.5
-#define SUB_NUMBER_OF_TOWERS 20
-#define SUB_RESPAWN_BLOCK 2000
-#define SUB_BLOCK_PATH 15000
-#define SUB_TOWER_DESTROYED 5000
+#define SUB_LIFE_POINTS 3.5		// Take points for each life point lost.
+#define SUB_NUMBER_OF_TOWERS 20	// Take points for each tower put.
+#define SUB_RESPAWN_BLOCK 2000	// Penalize for blocking the respawn point with a tower.
+#define SUB_BLOCK_PATH 15000	// Penalize for blocking all the paths from respawn to player's tower.
+#define SUB_TOWER_DESTROYED 5000 // Penalize for losing the game.
 
 // This value depends on the previous values.
 #define MAX_VALUE 8600
-#define MIN_VALUE -15000
+#define MIN_VALUE -17000
 
 #endif //_DEFINES_H_
