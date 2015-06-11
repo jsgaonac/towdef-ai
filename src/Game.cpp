@@ -106,10 +106,7 @@ float logic::Game::run(std::vector<bool>& cromosome, int speed_ms)
 		score -= SUB_TOWER_DESTROYED;
 	}
 
-	float scoreNormalized = (score - MIN_VALUE) / (MAX_VALUE - MIN_VALUE);
-
-	std::cout << "Player Life: " << playerLife << std::endl;
-	std::cout << "Score: " << score << "; " << scoreNormalized << std::endl;
+	double scoreNormalized = (score - MIN_VALUE) / (MAX_VALUE - MIN_VALUE);
 
 	return scoreNormalized;
 }

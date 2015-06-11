@@ -2,7 +2,7 @@
 #define _DEFINES_H_
 
 #define MAX_ROUNDS 1
-
+#define GAME_SPEED 100	//In milliseconds.
 #define BOARD_W 10
 #define BOARD_H 10
 
@@ -50,5 +50,7 @@
 // This value depends on the previous values.
 #define MAX_VALUE 8600
 #define MIN_VALUE -17000
+
+#define POPULATION_SIZE 40
 
 #endif //_DEFINES_H_

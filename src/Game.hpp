@@ -38,7 +38,7 @@ class logic::Game
 	bool isRoundOver;
 
 	// Stores the score of the game.
-	float score;
+	double score;
 
 	/* Stores the map coordinates of the shortest path from the respawn point 
 	 	to the player tower */
