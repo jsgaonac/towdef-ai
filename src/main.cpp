@@ -8,7 +8,7 @@
 
 int main()
 {
-    ui::UI* uiInstance = new ui::TextUI;
+    ui::UI* uiInstance = new ui::GraphicalUI;
     
     logic::Game gameInstance(uiInstance);
 

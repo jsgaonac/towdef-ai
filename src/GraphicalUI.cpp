@@ -145,7 +145,8 @@ void ui::GraphicalUI::show(logic::Game* gameInstance)
         // We execute the game loop from the logic part of the game.
         if (!(gameInstance->*loopMethod)())
         {
-            renderWindow.close();
+            renderWindow.clear();
+            return;
         }
 
         // draw everything here...
@@ -156,8 +157,6 @@ void ui::GraphicalUI::show(logic::Game* gameInstance)
         // end the current frame
         renderWindow.display();
     }
-
-    windowExists = false;
 }
 
 void ui::GraphicalUI::drawEntities(logic::Game* gameInstance)
