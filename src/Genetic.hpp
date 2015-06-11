@@ -31,7 +31,8 @@ class ai::Genetic
 public:
 	
 	Genetic(logic::Game *gameInstance);
-		
+
+	const ai::Individual *getPopulation();		
 };
 
 

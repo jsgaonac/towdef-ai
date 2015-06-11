@@ -1,7 +1,6 @@
 #ifndef _UI_HPP_
 #define _UI_HPP_
 
-
 namespace ui
 {
 	class UI;	
@@ -10,6 +9,11 @@ namespace ui
 namespace logic
 {
 	class Game;
+}
+
+namespace ai
+{
+	class Genetic;
 }
 
 // Pointer to a logic::Game method.
@@ -22,6 +26,8 @@ protected:
 	// We store the pointer to the game loop method so we can
 	// call it whenever we want.
 	gameMethodPtr loopMethod;
+
+	ai::Genetic *geneticPtr;
 
 public:
 
@@ -41,6 +47,8 @@ public:
 
 	// This should start the UI loop.
 	virtual void show(logic::Game* gameInstance) = 0;
+
+	void setGenetic(ai::Genetic *genetic);
 
 	virtual ~UI();
 };
