@@ -7,6 +7,7 @@
 logic::Game::Game(ui::UI* uiInstance)
 {
 	uiPtr = uiInstance;
+	uiPtr->setGameLoop(&logic::Game::gameLoop);
 }
 
 void logic::Game::init()
@@ -27,9 +28,11 @@ void logic::Game::init()
 		std::cout << "Defensores => No se pudo asignar memoria." << std::endl;
 	}
 
+	board.reset();
+
 	clock.restart();
 
-	uiPtr->setGameLoop(&logic::Game::gameLoop);
+	shortestPath.clear();
 
 }
 

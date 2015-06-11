@@ -28,11 +28,14 @@ class ai::Genetic
 
 	logic::Game *gameInstance;
 
+	// The summation of the fitness of all the individuals of the population.
+	double fitSum;
+
 public:
 	
 	Genetic(logic::Game *gameInstance);
 
-	const ai::Individual *getPopulation();		
+	const ai::Individual *getPopulation();
 };
 
 

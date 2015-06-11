@@ -38,6 +38,8 @@ public:
 
 	// Returns a vector of entities, at the position (x, y) of the board.
 	const std::vector<logic::Entity*>* getEntitiesAt(int x, int y) const;
+
+	void reset();
 };
 
 

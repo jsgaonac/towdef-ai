@@ -5,6 +5,18 @@ logic::Board::Board()
 	
 }
 
+void logic::Board::reset()
+{
+	for (std::size_t i = 0; i < BOARD_W; i++)
+	{
+		for (std::size_t j = 0; j < BOARD_H; j++)
+		{
+			board[i][j].clear();
+		}
+
+	}
+}
+
 bool logic::Board::isCoordValid(int x, int y) const
 {
 	if (x >= BOARD_W || y >= BOARD_H) return false;

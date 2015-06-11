@@ -15,5 +15,7 @@ void ui::TextUI::create(int w, int h, int bpp)
 
 void ui::TextUI::show(logic::Game* gameInstance)
 {
-	// Do nothing.
+	// Run the game loop until the game is over.
+	while ((gameInstance->*loopMethod)())
+	{}
 }

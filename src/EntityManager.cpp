@@ -21,7 +21,9 @@ bool logic::EntityManager::allocateAttackers(int n)
 	// is less or equal, just update the attackers size.
 	if (n <= allocatedAttackers)
 	{
-		setAttackersSize(n);
+		// This reset the active attackers to 1.
+		setAttackersSize(1);
+		initEntities(attackersPool, allocatedAttackers, logic::EntityType::ATTACK);
 	}
 	else
 	{	// Allocate again.
@@ -30,8 +32,8 @@ bool logic::EntityManager::allocateAttackers(int n)
 		if (success)
 		{
 			allocatedAttackers = n;
-			// We set it to 1 because only 1 attackers will be active at the
-			// beginning. Each tock this number will be incremented.
+			// We set it to 1 because only 1 attacker will be active at the
+			// beginning. Each tick this number will be incremented.
 			setAttackersSize(1);
 			initEntities(attackersPool, allocatedAttackers, logic::EntityType::ATTACK);
 			return true;
@@ -131,11 +133,11 @@ void logic::EntityManager::restartEntities(logic::EntityType type)
 	switch (type)
 	{
 		case logic::EntityType::ATTACK:
-			initEntities(attackersPool, attackersSize, type); break;
+			initEntities(attackersPool, allocatedAttackers, type); break;
 		case logic::EntityType::DEFENSE:
 			initEntities(defendersPool, defendersSize, type); break;
 		case logic::EntityType::PLAYER:
-			playerPtr->init(logic::EntityType::PLAYER);
+			playerPtr->init(logic::EntityType::PLAYER); break;
 		default: break;
 	}
 }

@@ -156,6 +156,8 @@ void ui::GraphicalUI::show(logic::Game* gameInstance)
         // end the current frame
         renderWindow.display();
     }
+
+    windowExists = false;
 }
 
 void ui::GraphicalUI::drawEntities(logic::Game* gameInstance)
