@@ -28,6 +28,8 @@ void logic::Game::init()
 		std::cout << "Defensores => No se pudo asignar memoria." << std::endl;
 	}
 
+	entityManager.restartEntities(logic::EntityType::PLAYER);
+
 	board.reset();
 
 	clock.restart();
