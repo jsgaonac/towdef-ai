@@ -28,12 +28,14 @@ class ai::Genetic
 
 	logic::Game *gameInstance;
 
-	// The summation of the fitness of all the individuals of the population.
-	double fitSum;
+	// Performs selection among the cromosome in the population and returns the selected one.
+	ai::Individual& selection();
 
 public:
 	
 	Genetic(logic::Game *gameInstance);
+
+	void run();
 
 	const ai::Individual *getPopulation();
 };

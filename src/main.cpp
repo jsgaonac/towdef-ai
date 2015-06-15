@@ -8,7 +8,7 @@
 
 int main()
 {
-    ui::UI* uiInstance = new ui::GraphicalUI;
+    ui::UI* uiInstance = new ui::TextUI;
     
     logic::Game gameInstance(uiInstance);
 
@@ -16,12 +16,7 @@ int main()
 
     uiInstance->setGenetic(&genetic);
 
-    auto pop = genetic.getPopulation();
-
-    for (int i = 0; i < POPULATION_SIZE; i++)
-    {
-    	std::cout << pop[i].fitness << std::endl;
-    }
+    genetic.run();
 
     delete uiInstance;
     

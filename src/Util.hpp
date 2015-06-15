@@ -29,4 +29,8 @@ struct Point
 
 void generateRandomCrom(std::vector<bool> &crom, std::size_t length);
 
+int getRandomInteger(int low, int high);
+
+double getRandomReal(double low, double high);
+
 #endif
