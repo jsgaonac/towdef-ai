@@ -38,11 +38,11 @@ void logic::Game::init()
 
 }
 
-void logic::Game::initRound(std::vector<bool>& cromosome)
+void logic::Game::initRound(std::vector<bool>& chromosome)
 {
-	entityManager.placeDefendersOnBoard(board, cromosome);
+	entityManager.placeDefendersOnBoard(board, chromosome);
 
-	calculateShortestPath(cromosome, shortestPath);
+	calculateShortestPath(chromosome, shortestPath);
 
 	if (shortestPath.size() == 0)
 	{
@@ -53,7 +53,7 @@ void logic::Game::initRound(std::vector<bool>& cromosome)
 		score -= SUB_BLOCK_PATH;
 	}
 
-	if (cromosome[0] == 1)
+	if (chromosome[0] == 1)
 	{
 		score -= SUB_RESPAWN_BLOCK;
 	}
@@ -85,12 +85,12 @@ bool logic::Game::gameLoop()
 	return false;
 }
 
-float logic::Game::run(std::vector<bool>& cromosome, int speed_ms)
+float logic::Game::run(std::vector<bool>& chromosome, int speed_ms)
 {
 	ticks = speed_ms;
 
 	init();
-	initRound(cromosome);
+	initRound(chromosome);
 
 	uiPtr->create(WINDOW_W, WINDOW_H, WINDOW_BPP);
 	uiPtr->show(this);

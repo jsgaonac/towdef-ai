@@ -10,12 +10,12 @@ namespace ai
 
 	struct Individual
 	{
-		std::vector<bool> cromosome;
+		std::vector<bool> chromosome;
 		double fitness;
 
 		Individual()
 		{
-			cromosome.reserve(100);
+			chromosome.reserve(100);
 			fitness = 0;
 		}
 	};
@@ -28,7 +28,7 @@ class ai::Genetic
 
 	logic::Game *gameInstance;
 
-	// Performs selection among the cromosome in the population and returns the selected one.
+	// Performs selection among the chromosome in the population and returns the selected one.
 	ai::Individual& selection();
 
 public:

@@ -9,8 +9,8 @@ ai::Genetic::Genetic(logic::Game *game)
 	
 	for (int i = 0; i < POPULATION_SIZE; i++)
 	{
-		generateRandomCrom(population[i].cromosome, 100);
-		population[i].fitness = gameInstance->run(population[i].cromosome, 0);
+		generateRandomCrom(population[i].chromosome, 100);
+		population[i].fitness = gameInstance->run(population[i].chromosome, 0);
 	}
 }
 
@@ -22,10 +22,10 @@ void ai::Genetic::run()
 ai::Individual& ai::Genetic::selection()
 {
 	/* Rank-selection (steps):
-	// 1. Two cromosomes are chosen randomly.
-	// 2. Each cromosome is given a probability (proportionally to their fitness) to be chosen.
+	// 1. Two chromosomes are chosen randomly.
+	// 2. Each chromosome is given a probability (proportionally to their fitness) to be chosen.
 	// 3. A random number R [0, 1] is generated.
-	// 4. A cromosome is chosen.
+	// 4. A chromosome is chosen.
 	*/
 
 	int first = 0;
