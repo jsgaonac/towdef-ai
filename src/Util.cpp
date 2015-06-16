@@ -10,7 +10,7 @@ void generateRandomCrom(std::vector<bool> &crom, std::size_t length)
 	{
 		int j = dis(mt);
 
-		if(j <= 6)
+		if(j <= 5)
 		{
 			crom.push_back(false);
 		}

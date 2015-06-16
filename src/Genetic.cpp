@@ -4,7 +4,7 @@
 #include <iostream>
 
 #define GAME_SPEED 0
-#define MUT_PROB 0.05
+#define MUT_PROB 0.01
 
 ai::Genetic::Genetic(logic::Game *game, ui::UI *uiPtr)
 {
@@ -23,7 +23,7 @@ void ai::Genetic::run()
 	int iterations = 0;
 	double avg = 0;
 
-	while (iterations < 15000 && avg < 0.9)
+	while (iterations < 20000 && avg < 0.99)
 	{
 		ai::Individual &parent1 = selection();
 		ai::Individual &parent2 = selection();
@@ -45,6 +45,8 @@ void ai::Genetic::run()
 
 		avg = ui->showGeneticStats();
 	}
+
+	ui->showGeneticStats();
 }
 
 ai::Individual& ai::Genetic::selection()

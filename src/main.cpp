@@ -26,6 +26,8 @@ int main()
 
     gameInstance.setUI(uiInstance);
 
+    std::cin.get();
+
     for (int i = 0; i < POPULATION_SIZE; i++)
     {
         gameInstance.run(pop[i].chromosome, 100);

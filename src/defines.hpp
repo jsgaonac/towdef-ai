@@ -42,12 +42,12 @@
 
 #define SUB_NUMBER_OF_TOWERS 20	// Take points for each tower put.
 #define SUB_RESPAWN_BLOCK 2000	// Penalize for blocking the respawn point with a tower.
-#define SUB_BLOCK_PATH 15000	// Penalize for blocking all the paths from respawn to player's tower.
-#define SUB_TOWER_DESTROYED 5000 // Penalize for losing the game.
+#define SUB_BLOCK_PATH 7000	// Penalize for blocking all the paths from respawn to player's tower.
+#define SUB_TOWER_DESTROYED 4500 // Penalize for losing the game.
 
 // This value depends on the previous values.
-#define MAX_VALUE 8600
-#define MIN_VALUE -17000
+#define MAX_VALUE 8760
+#define MIN_VALUE -11500
 
 #define POPULATION_SIZE 100
 #define CHROM_LENGTH 100

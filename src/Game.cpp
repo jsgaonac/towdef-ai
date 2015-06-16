@@ -106,7 +106,7 @@ double logic::Game::run(const std::vector<bool>& chromosome, int speed_ms)
 	score +=  (ATTACKERS_ALLOC - entityManager.getNumberOfAttackers()) * ADD_DESTROY_POINTS;
 
 	// Give points for each unit of life.
-	score += ((PLAYER_HEALTH - playerLife) * ADD_LIFE_POINTS);
+	score += (playerLife * ADD_LIFE_POINTS);
 
 	// Take points for each tower placed.
 	score -= (entityManager.getNumberOfTowers() * SUB_NUMBER_OF_TOWERS);
