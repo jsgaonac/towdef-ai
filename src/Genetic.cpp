@@ -131,22 +131,12 @@ void ai::Genetic::mutation(ai::Individual &ind, double mutationProbability)
 
 void ai::Genetic::replacement(ai::Individual &ind)
 {
-	int worstIndex = 0;
-	double worst = 1;
+	int randIndex = getRandomInteger(0, POPULATION_SIZE - 1);
 
-	for (int i = 0; i < POPULATION_SIZE; i++)
+	if (population[randIndex].fitness < ind.fitness)
 	{
-		if (population[i].fitness < worst)
-		{
-			worstIndex = i;
-			worst = population[i].fitness;
-		}
-	}
-
-	if (worst < ind.fitness)
-	{
-		population[worstIndex].chromosome = ind.chromosome;
-		population[worstIndex].fitness = ind.fitness;
+		population[randIndex].chromosome = ind.chromosome;
+		population[randIndex].fitness = ind.fitness;
 	}
 }
 

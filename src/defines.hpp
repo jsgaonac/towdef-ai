@@ -40,7 +40,6 @@
 #define ADD_DESTROY_POINTS 150 	// Give points for each enemy destroyed.
 #define ADD_LIFE_POINTS 3 		// Give points for each life point kept.
 
-#define SUB_LIFE_POINTS 3.5		// Take points for each life point lost.
 #define SUB_NUMBER_OF_TOWERS 20	// Take points for each tower put.
 #define SUB_RESPAWN_BLOCK 2000	// Penalize for blocking the respawn point with a tower.
 #define SUB_BLOCK_PATH 15000	// Penalize for blocking all the paths from respawn to player's tower.
