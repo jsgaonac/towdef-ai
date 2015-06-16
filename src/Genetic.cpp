@@ -23,7 +23,7 @@ void ai::Genetic::run()
 	int iterations = 0;
 	double avg = 0;
 
-	while (iterations < 1000 && avg < 0.9)
+	while (iterations < 15000 && avg < 0.9)
 	{
 		ai::Individual &parent1 = selection();
 		ai::Individual &parent2 = selection();
@@ -104,13 +104,13 @@ void ai::Genetic::crossover(ai::Individual &parent1, ai::Individual &parent2, st
 	{
 		if (mask[i] == 1)
 		{
-			children[0].chromosome[i] = parent1.chromosome[i];
-			children[1].chromosome[i] = parent2.chromosome[i];
+			children[0].chromosome.push_back(parent1.chromosome[i]);
+			children[1].chromosome.push_back(parent2.chromosome[i]);
 		}
 		else
 		{
-			children[0].chromosome[i] = parent2.chromosome[i];
-			children[1].chromosome[i] = parent1.chromosome[i];
+			children[0].chromosome.push_back(parent2.chromosome[i]);
+			children[1].chromosome.push_back(parent1.chromosome[i]);
 		}
 	}
 }
@@ -131,12 +131,22 @@ void ai::Genetic::mutation(ai::Individual &ind, double mutationProbability)
 
 void ai::Genetic::replacement(ai::Individual &ind)
 {
-	int randIndex = getRandomInteger(0, POPULATION_SIZE - 1);
+	int worstIndex = 0;
+	double worst = 1;
 
-	if (population[randIndex].fitness < ind.fitness)
+	for (int i = 0; i < POPULATION_SIZE; i++)
 	{
-		population[randIndex].chromosome = ind.chromosome;
-		population[randIndex].fitness = ind.fitness;
+		if (population[i].fitness < worst)
+		{
+			worstIndex = i;
+			worst = population[i].fitness;
+		}
+	}
+
+	if (worst < ind.fitness)
+	{
+		population[worstIndex].chromosome = ind.chromosome;
+		population[worstIndex].fitness = ind.fitness;
 	}
 }
 
