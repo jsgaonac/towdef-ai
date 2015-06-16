@@ -34,6 +34,8 @@ class ai::Genetic
 	// Takes two parents and a vector, which will hold the children that result from the crossover.
 	void crossover(ai::Individual &parent1, ai::Individual &parent2, std::vector<ai::Individual> &children);
 
+	void mutation(ai::Individual &ind, double mutationProbability);
+
 public:
 	
 	Genetic(logic::Game *gameInstance);

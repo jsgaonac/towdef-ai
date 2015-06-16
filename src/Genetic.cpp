@@ -3,7 +3,8 @@
 
 #include <iostream>
 
-const int GAME_SPEED = 0;
+#define GAME_SPEED 0
+#define MUT_PROB 1 / 100
 
 ai::Genetic::Genetic(logic::Game *game)
 {
@@ -24,6 +25,9 @@ void ai::Genetic::run()
 	std::vector<ai::Individual> children;
 
 	crossover(parent1, parent2, children);
+
+	mutation(children[0], MUT_PROB);
+	mutation(children[1], MUT_PROB);
 
 	children[0].fitness = gameInstance->run(children[0].chromosome, GAME_SPEED);
 	children[1].fitness = gameInstance->run(children[1].chromosome, GAME_SPEED);
@@ -96,6 +100,20 @@ void ai::Genetic::crossover(ai::Individual &parent1, ai::Individual &parent2, st
 		{
 			children[0].chromosome[i] = parent2.chromosome[i];
 			children[1].chromosome[i] = parent1.chromosome[i];
+		}
+	}
+}
+
+void ai::Genetic::mutation(ai::Individual &ind, double mutationProbability)
+{
+	for (std::size_t i = 0; i < ind.chromosome.size(); i++)
+	{
+		double z = getRandomReal(0, 1);
+
+		if (z <= mutationProbability)
+		{
+			// Value is fliiped.
+			ind.chromosome[i] = !ind.chromosome[i];
 		}
 	}
 }
