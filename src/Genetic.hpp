@@ -31,6 +31,9 @@ class ai::Genetic
 	// Performs selection among the chromosome in the population and returns the selected one.
 	ai::Individual& selection();
 
+	// Takes two parents and a vector, which will hold the children that result from the crossover.
+	void crossover(ai::Individual &parent1, ai::Individual &parent2, std::vector<ai::Individual> &children);
+
 public:
 	
 	Genetic(logic::Game *gameInstance);
