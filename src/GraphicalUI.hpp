@@ -49,6 +49,7 @@ public:
 
 	void create(int w, int h, int bpp = 32) override;
 	void show(logic::Game* gameInstance) override;
+	double showGeneticStats() override;
 };
 
 #endif

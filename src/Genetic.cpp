@@ -4,36 +4,47 @@
 #include <iostream>
 
 #define GAME_SPEED 0
-#define MUT_PROB 1 / 100
+#define MUT_PROB 1 / CHROM_LENGTH
 
-ai::Genetic::Genetic(logic::Game *game)
+ai::Genetic::Genetic(logic::Game *game, ui::UI *uiPtr)
 {
 	gameInstance = game;
+	ui = uiPtr;
 	
 	for (int i = 0; i < POPULATION_SIZE; i++)
 	{
-		generateRandomCrom(population[i].chromosome, 100);
+		generateRandomCrom(population[i].chromosome, CHROM_LENGTH);
 		population[i].fitness = gameInstance->run(population[i].chromosome, GAME_SPEED);
 	}
 }
 
 void ai::Genetic::run()
 {
-	ai::Individual &parent1 = selection();
-	ai::Individual &parent2 = selection();
+	int iterations = 0;
+	double avg = 0;
 
-	std::vector<ai::Individual> children;
+	while (iterations < 1000 && avg < 0.9)
+	{
+		ai::Individual &parent1 = selection();
+		ai::Individual &parent2 = selection();
 
-	crossover(parent1, parent2, children);
+		std::vector<ai::Individual> children;
 
-	mutation(children[0], MUT_PROB);
-	mutation(children[1], MUT_PROB);
+		crossover(parent1, parent2, children);
 
-	children[0].fitness = gameInstance->run(children[0].chromosome, GAME_SPEED);
-	children[1].fitness = gameInstance->run(children[1].chromosome, GAME_SPEED);
+		mutation(children[0], MUT_PROB);
+		mutation(children[1], MUT_PROB);
 
-	std::cout << parent1.fitness << " -- " << parent2.fitness << std::endl;
-	std::cout << "==> " << children[0].fitness << " " << children[1].fitness << std::endl;
+		children[0].fitness = gameInstance->run(children[0].chromosome, GAME_SPEED);
+		children[1].fitness = gameInstance->run(children[1].chromosome, GAME_SPEED);
+
+		replacement(children[0]);
+		replacement(children[1]);
+
+		iterations++;
+
+		avg = ui->showGeneticStats();
+	}
 }
 
 ai::Individual& ai::Genetic::selection()
@@ -81,7 +92,7 @@ void ai::Genetic::crossover(ai::Individual &parent1, ai::Individual &parent2, st
 	*/
 
 	std::vector<bool> mask;
-	generateRandomCrom(mask, 100);
+	generateRandomCrom(mask, CHROM_LENGTH);
 
 	ai::Individual child1;
 	ai::Individual child2;
@@ -89,7 +100,7 @@ void ai::Genetic::crossover(ai::Individual &parent1, ai::Individual &parent2, st
 	children.push_back(child1);
 	children.push_back(child2);
 
-	for (std::size_t i = 0; i < 100; i++)
+	for (std::size_t i = 0; i < CHROM_LENGTH; i++)
 	{
 		if (mask[i] == 1)
 		{
@@ -115,6 +126,17 @@ void ai::Genetic::mutation(ai::Individual &ind, double mutationProbability)
 			// Value is fliiped.
 			ind.chromosome[i] = !ind.chromosome[i];
 		}
+	}
+}
+
+void ai::Genetic::replacement(ai::Individual &ind)
+{
+	int randIndex = getRandomInteger(0, POPULATION_SIZE - 1);
+
+	if (population[randIndex].fitness < ind.fitness)
+	{
+		population[randIndex].chromosome = ind.chromosome;
+		population[randIndex].fitness = ind.fitness;
 	}
 }
 

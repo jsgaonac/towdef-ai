@@ -50,6 +50,7 @@
 #define MAX_VALUE 8600
 #define MIN_VALUE -17000
 
-#define POPULATION_SIZE 40
+#define POPULATION_SIZE 100
+#define CHROM_LENGTH 100
 
 #endif //_DEFINES_H_

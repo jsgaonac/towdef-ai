@@ -12,7 +12,7 @@ int main()
     
     logic::Game gameInstance(uiInstance);
 
-    ai::Genetic genetic(&gameInstance);
+    ai::Genetic genetic(&gameInstance, uiInstance);
 
     uiInstance->setGenetic(&genetic);
 

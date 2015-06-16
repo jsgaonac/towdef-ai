@@ -203,5 +203,7 @@ void ui::GraphicalUI::drawEntities(logic::Game* gameInstance)
     }
 }
 
-
-
+double ui::GraphicalUI::showGeneticStats()
+{
+    return 0;
+}

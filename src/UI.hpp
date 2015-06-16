@@ -48,6 +48,9 @@ public:
 	// This should start the UI loop.
 	virtual void show(logic::Game* gameInstance) = 0;
 
+	// Returns the average fitness.
+	virtual double showGeneticStats() = 0;
+
 	void setGenetic(ai::Genetic *genetic);
 
 	virtual ~UI();

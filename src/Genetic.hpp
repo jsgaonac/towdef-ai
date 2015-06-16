@@ -27,6 +27,7 @@ class ai::Genetic
 	ai::Individual population[POPULATION_SIZE];
 
 	logic::Game *gameInstance;
+	ui::UI *ui;
 
 	// Performs selection among the chromosome in the population and returns the selected one.
 	ai::Individual& selection();
@@ -36,9 +37,14 @@ class ai::Genetic
 
 	void mutation(ai::Individual &ind, double mutationProbability);
 
+	// Does a random replacement. Takes a random individual I from the population
+	// if I.fitness < ind.fitness, the I individual is replaced by ind. Otherwise, 
+	// ind is discarded.
+	void replacement(ai::Individual &ind);
+
 public:
 	
-	Genetic(logic::Game *gameInstance);
+	Genetic(logic::Game *gameInstance, ui::UI *ui);
 
 	void run();
 
