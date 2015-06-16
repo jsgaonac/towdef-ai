@@ -19,6 +19,19 @@ int main()
     genetic.run();
 
     delete uiInstance;
+
+    auto pop = genetic.getPopulation();
+
+    uiInstance = new ui::GraphicalUI;
+
+    gameInstance.setUI(uiInstance);
+
+    for (int i = 0; i < POPULATION_SIZE; i++)
+    {
+        gameInstance.run(pop[i].chromosome, 100);
+    }
+
+    delete uiInstance;    
     
     return 0;
 }

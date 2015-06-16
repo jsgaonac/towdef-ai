@@ -224,7 +224,7 @@ void logic::EntityManager::updateAttackers(logic::Board& board, const std::vecto
 	setAttackersSize(attackersSize + 1);
 }
 
-void logic::EntityManager::placeDefendersOnBoard(logic::Board& board, std::vector<bool> &crom)
+void logic::EntityManager::placeDefendersOnBoard(logic::Board& board, const std::vector<bool> &crom)
 {
 	int count = 0;
 

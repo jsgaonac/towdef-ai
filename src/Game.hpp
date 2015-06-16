@@ -51,7 +51,7 @@ class logic::Game
 	// the entities will need to be initialized.
 	// It also 'reads' the provided gen and 'puts' the player defense tower in the given
 	// position.
-	void initRound(std::vector<bool>& chromosome);
+	void initRound(const std::vector<bool>& chromosome);
 
 	// Checks if the game or round is over and updates the state.
 	void updateState();
@@ -71,7 +71,9 @@ public:
 	 the game will run, in milliseconds.
 	 If speed_ms = 500, each 500 ms the game will update. If speed_ms = 0 the game
 	 will update at each loop. */
-	float run(std::vector<bool>& chromosome, int speed_ms);
+	double run(const std::vector<bool>& chromosome, int speed_ms);
+
+	void setUI(ui::UI* uiInstance);
 
 	const logic::Board& getBoard();
 	

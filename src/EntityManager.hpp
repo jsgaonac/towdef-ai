@@ -72,7 +72,7 @@ public:
 
 	// Iterates through all the active defenders and puts them on the board.
 	// This is needed to be called only once, since the defenders do not move.
-	void placeDefendersOnBoard(logic::Board& board, std::vector<bool>& gen);
+	void placeDefendersOnBoard(logic::Board& board, const std::vector<bool>& gen);
 
 	~EntityManager();
 

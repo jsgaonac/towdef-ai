@@ -53,7 +53,7 @@ int GetMap( int x, int y )
 	return world_map[(y*MAP_WIDTH)+x];
 }
 
-void transformchromosome(std::vector<bool> &crom)
+void transformchromosome(const std::vector<bool> &crom)
 {
 	for (std::size_t i = 0; i < crom.size(); ++i)
 	{
@@ -199,7 +199,7 @@ float MapSearchNode::GetCost( MapSearchNode &successor )
 }
 
 
-void calculateShortestPath(std::vector<bool> &crom, std::vector<Point> &pointsList)
+void calculateShortestPath(const std::vector<bool> &crom, std::vector<Point> &pointsList)
 {
 
 	// Create an instance of the search class...

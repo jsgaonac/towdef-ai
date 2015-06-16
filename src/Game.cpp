@@ -6,8 +6,13 @@
 
 logic::Game::Game(ui::UI* uiInstance)
 {
+	setUI(uiInstance);
+}
+
+void logic::Game::setUI(ui::UI* uiInstance)
+{
 	uiPtr = uiInstance;
-	uiPtr->setGameLoop(&logic::Game::gameLoop);
+	uiPtr->setGameLoop(&logic::Game::gameLoop);;
 }
 
 void logic::Game::init()
@@ -38,7 +43,7 @@ void logic::Game::init()
 
 }
 
-void logic::Game::initRound(std::vector<bool>& chromosome)
+void logic::Game::initRound(const std::vector<bool>& chromosome)
 {
 	entityManager.placeDefendersOnBoard(board, chromosome);
 
@@ -85,7 +90,7 @@ bool logic::Game::gameLoop()
 	return false;
 }
 
-float logic::Game::run(std::vector<bool>& chromosome, int speed_ms)
+double logic::Game::run(const std::vector<bool>& chromosome, int speed_ms)
 {
 	ticks = speed_ms;
 

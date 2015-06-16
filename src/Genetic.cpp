@@ -4,7 +4,7 @@
 #include <iostream>
 
 #define GAME_SPEED 0
-#define MUT_PROB 1 / CHROM_LENGTH
+#define MUT_PROB 0.05
 
 ai::Genetic::Genetic(logic::Game *game, ui::UI *uiPtr)
 {
