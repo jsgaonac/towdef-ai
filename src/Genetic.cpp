@@ -47,6 +47,7 @@ void ai::Genetic::run()
 	}
 
 	ui->showGeneticStats();
+	std::cout << "Number of iterations: " << iterations + 1 << std::endl;
 }
 
 ai::Individual& ai::Genetic::selection()
