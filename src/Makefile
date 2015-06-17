@@ -2,8 +2,8 @@
 
 CC = g++
 OBJS = main.o Game.o Board.o Entity.o EntityManager.o UI.o GraphicalUI.o Util.o Genetic.o TextUI.o
-DEBUG = -g
-CFLAGS = -Wall -std=c++11 -c $(DEBUG)
+ARGS = -O3
+CFLAGS = -Wall -std=c++11 -c $(ARGS)
 LFLAGS = -Wall -L/usr/local/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 all: $(OBJS)

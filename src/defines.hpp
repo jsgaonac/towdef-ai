@@ -9,11 +9,11 @@
 #define DEFENDERS_ALLOC 100
 
 #define ATTACK_HEALTH 200
-#define ATTACK_POWER 50
+#define ATTACK_POWER 25
 #define ATTACK_SPEED 1
 
 #define DEFENSE_HEALTH  100
-#define DEFENSE_POWER 8
+#define DEFENSE_POWER 7
 #define DEFENSE_SPEED 1
 
 #define PLAYER_HEALTH 1000
@@ -40,14 +40,14 @@
 #define ADD_DESTROY_POINTS 150 	// Give points for each enemy destroyed.
 #define ADD_LIFE_POINTS 3 		// Give points for each life point kept.
 
-#define SUB_NUMBER_OF_TOWERS 20	// Take points for each tower put.
-#define SUB_RESPAWN_BLOCK 2000	// Penalize for blocking the respawn point with a tower.
+#define SUB_NUMBER_OF_TOWERS 50	// Take points for each tower put.
+#define SUB_RESPAWN_BLOCK 5000	// Penalize for blocking the respawn point with a tower.
 #define SUB_BLOCK_PATH 7000	// Penalize for blocking all the paths from respawn to player's tower.
-#define SUB_TOWER_DESTROYED 4500 // Penalize for losing the game.
+#define SUB_TOWER_DESTROYED 2500 // Penalize for losing the game.
 
 // This value depends on the previous values.
-#define MAX_VALUE 8760
-#define MIN_VALUE -11500
+#define MAX_VALUE 8523
+#define MIN_VALUE -12000
 
 #define POPULATION_SIZE 100
 #define CHROM_LENGTH 100
